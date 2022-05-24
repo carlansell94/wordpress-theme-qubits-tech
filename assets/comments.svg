@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100mm" height="100mm" version="1.1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <rect x="14.44" y="19.44" width="71.11" height="51.11" rx="8.889" ry="8.889" stroke="#000" stroke-linecap="round" stroke-width="8.889" style="paint-order:fill markers stroke"/>
+  <path d="m10.01 59.46c-0.04295 13.96-0.0859 27.93 2.973 29.75 3.059 1.821 9.221-8.5 12.1-13.41 2.878-4.911 2.472-4.412 2.066-3.913" stroke-width="0"/>
+ </g>
+</svg>

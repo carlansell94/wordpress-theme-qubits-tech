@@ -1,0 +1,1020 @@
+@charset "UTF-8";
+
+/*
+Theme Name: Qubits Tech
+Author: Qubits & Bytes
+Author URI: https://qubitsandbytes.co.uk/
+Description: Theme for the Qubits & Bytes site
+Version: 0.1
+Tested up to: 5.93
+*/
+
+/* CONTENTS:
+0: SITE VARIABLES
+1: SITE WIDE STYLES
+2: HEADER
+    2.1: HEADER LOGO
+    2.2: HEADER PRIMARY NAV
+3: BANNER
+4: PAGE CONTAINER
+5: PAGE CONTENT
+    5.1: POST LIST
+    5.2: POST GRID
+    5.3: PAGINATION
+6: POST CONTENT
+    6.1: POST META
+    6.2: POST TEXT CONTENT
+    6.3: POST TABLES
+    6.4: POST IMAGES
+7: RELATED POSTS
+8: COMMENTS
+    8.1: INDIVIDUAL COMMENT
+    8.2: POST AUTHOR COMMENTS
+    8.3: COMMENT BOX BUTTONS
+    8.4: COMMENT FORM
+9: TAGS & CATEGORIES
+10: SIDEBAR
+    10.1: HEADING ELEMENTS
+    10.2: LIST ELEMENTS
+    10.3: DETAILS ELEMENTS
+    10.4: OTHER SPECIFIC ELEMENTS
+    10.5: WP BLOCK SPECIFIC
+11: FOOTER
+12: SITE SEARCH
+    12.1 HEADER SEARCH
+    12.2 WP SEARCH BLOCK
+13: WP BLOCK OVERRIDES
+14: ANIMATIONS
+15: RESPONSIVE SIZES
+*/
+
+
+/* ----- 0: SITE VARIABLES ----- */
+:root {
+    --qb-font-logo: Montserrat;
+    --qb-font-heading: Montserrat;
+    --qb-font-content: OpenSans;
+
+    --qb-colour-header-bg: #222;
+    --qb-colour-header-bg-alt: #bbb;
+    --qb-colour-header-bg-hover: #1e2125;
+    --qb-colour-header-buttons: #212529;
+
+    --qb-colour-site-bg: #f9f9f9;
+    --qb-colour-content-bg: #fff;
+    --qb-colour-content-bg-alt: #222;
+    --qb-colour-font: #222;
+    --qb-colour-font-alt: #fff;
+    --qb-colour-accent: purple;
+
+    --qb-border: 1px solid var(--qb-border-colour);
+    --qb-border-colour: #f0f0f0;
+
+    --qb-shadow: 0 2px 4px rgb(0 0 0 / 16%);
+    --qb-transition: all 120ms ease-in-out;
+}
+
+
+/* ----- 1: SITE WIDE STYLES ----- */
+body {
+    background-color: var(--qb-colour-site-bg);
+    font-family: sans-serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--qb-font-heading);
+}
+
+main h2 {
+    border-bottom: var(--qb-border);
+    font-weight: normal;
+    margin: 4rem 0 0;
+    padding-bottom: 1rem;
+}
+
+:is(h1, h2, h3, h4, h5, h6).hidden-header {
+    display: none;
+}
+
+table {
+    background-color: var(--qb-colour-site-bg);
+}
+
+table > thead {
+    background-color: var(--qb-colour-content-bg-alt);
+    color: var(--qb-colour-font-alt);
+    line-height: 2rem;
+}
+
+table > tfoot {
+    line-height: 2rem;
+}
+
+table > tbody tr:nth-child(2n) {
+    background-color: #eee;
+}
+
+table > tbody td {
+    padding: .5rem 0;
+}
+
+table > tbody td > a {
+    color: var(--qb-colour-accent);
+}
+
+
+/* ----- 2: HEADER ----- */
+#main-header {
+    background: var(--qb-colour-header-bg);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-right: .5rem;
+}
+
+#main-header .show {
+    display: block;
+}
+
+#main-header > button {
+    display: none;
+}
+
+/* ------ 2.1: HEADER LOGO ------ */
+#main-header > #logo {
+    align-items: center;
+    display: flex;
+    font-family: var(--qb-font-logo);
+    padding: .25rem;
+    text-align: center;
+}
+
+#main-header > #logo * {
+    margin: 0;
+}
+
+#main-header > #logo > img {
+    max-height: 50px;
+}
+
+#main-header #logo-text {
+    color: var(--qb-colour-font-alt);
+    margin-left: 1rem;
+}
+
+#main-header #logo-site-tagline {
+    font-size: .5rem;
+    line-height: 1rem;
+    text-transform: uppercase;
+}
+
+#main-header #logo-site-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* ------ 2.2: HEADER PRIMARY NAV ------ */
+#primary-menu {
+    align-items: center;
+    display: flex;
+    font-size: .9rem;
+    list-style-type: none;
+    margin: 0 1rem 0 0;
+}
+
+#primary-menu > .menu-item > div {
+    display: flex;
+}
+
+.menu-item > a:not(.sub-menu > li > a),
+.menu-item > div > a {
+    align-items: center;
+    border-radius: .5rem;
+    color: var(--qb-colour-font-alt);
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+    padding: .75rem;
+    transition: var(--qb-transition);
+}
+
+.menu-item > a:hover:not(.sub-menu > li > a),
+.menu-item > div > a:hover,
+.active-menu {
+    background-color: var(--qb-colour-header-bg-alt);
+    border-radius: .5rem;
+    box-shadow: var(--qb-shadow);
+    color: var(--qb-colour-font);
+}
+
+#primary-menu .sub-menu {
+    background-color: var(--qb-colour-font-alt);
+    border: var(--qb-border);
+    border-radius: .5rem;
+    color: var(--qb-colour-font);
+    display: none;
+    list-style: none;
+    padding: .5rem 0;
+    position: absolute;
+    z-index: 1000;
+}
+
+#primary-menu .sub-menu > .menu-item > a {
+    color: var(--qb-colour-font);
+    display: block;
+    padding: .5rem 1rem;
+    white-space: nowrap;
+}
+
+#primary-menu .sub-menu > .menu-item > a:hover {
+    background-color: var(--qb-colour-header-bg-alt);
+}
+
+#primary-menu .menu-item-icon-container {
+    cursor: pointer;
+    display: none;
+}
+
+#primary-menu .menu-item-icon {
+    text-align: center;
+    text-indent: 0;
+    transition: var(--qb-transition);
+    width: 100%;
+}
+
+
+/* ----- 3: BANNER ----- */
+#banner {
+    max-width: 100%;
+    position: absolute;
+}
+
+
+/* ----- 4: PAGE CONTAINER ----- */
+#page-container {
+    background-color: var(--qb-colour-content-bg);
+    box-shadow: var(--qb-shadow);
+    margin: 14vw auto 2rem;
+    padding: 1rem 2rem;
+    position: relative;
+}
+
+#page-container header > h1 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 1.67rem;
+    margin-bottom: 0;
+}
+
+
+/* ----- 5: PAGE CONTENT ----- */
+.posts-container {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: 1fr;
+    margin: 1rem 0;
+}
+
+/* ------ 5.1: POST LIST ------ */
+.post-container:hover {
+    transform: scale(1.02);
+    transition: var(--qb-transition);
+}
+
+.post-container > a {
+    color: var(--qb-colour-font);
+    display: grid;
+    grid-gap: 2rem;
+    grid-template-columns: 2fr 3fr;
+}
+
+.post-container .post-title {
+    font-size: clamp(1.1rem, 1.25vw, 1.5rem);
+}
+
+.post-container .excerpt {
+    font-size: .9rem;
+    line-height: 1.5rem;
+}
+
+.post-container .post-thumbnail {
+    aspect-ratio: 2/1;
+    border-radius: 1rem;
+    box-shadow: var(--qb-shadow);
+    max-width: 100%;
+}
+
+.post-container .post-date {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 1rem 0;
+    box-shadow: var(--qb-shadow);
+    color: var(--qb-colour-font-alt);
+    font-size: 0.8em;
+    font-weight: bold;
+    padding: 0.4rem 0.6rem;
+    position: absolute;
+}
+
+.post-container .post-date > img {
+    max-width: 1rem;
+    padding-right: 0.3rem;
+    position: relative;
+    top: -0.1rem;
+    vertical-align: text-top;
+}
+
+/* ------ 5.2: POST GRID ------ */
+.posts-container.children {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 2rem;
+}
+
+.posts-container > a {
+    border-radius: 1rem;
+    box-shadow: var(--qb-shadow);
+    position: relative;
+}
+
+.posts-container > a:hover {
+    transform: scale(1.02);
+    transition: var(--qb-transition);
+}
+
+.posts-container > a > div {
+    aspect-ratio: 3/2;
+    background-position: center;
+    background-size: cover;
+    border-radius: 1rem;
+    filter: brightness(60%);
+}
+
+.posts-container > a > h3 {
+    bottom: 0;
+    color: var(--qb-colour-font-alt);
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    margin: 1rem;
+    position: absolute;
+    text-shadow: .25rem .25rem .5rem #000;
+}
+
+/* ------ 5.3: PAGINATION ------ */
+.pagination {
+    margin: 2rem auto;
+}
+
+.pagination .page-numbers {
+    background: var(--qb-colour-site-bg);
+    border: var(--qb-border);
+    border-radius: .25rem;
+    color: var(--qb-colour-font);
+    padding: .5rem 1rem;
+}
+
+.pagination .page-numbers.current {
+    background: var(--qb-colour-accent);
+    color: var(--qb-colour-font-alt);
+}
+
+
+/* ----- 6: POST CONTENT ----- */
+
+/* ------ 6.1: POST META ------ */
+#meta {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;  
+    font-family: var(--qb-font-heading);  
+    gap: 1rem 2rem;
+    margin-top: .5rem;
+}
+
+#meta > div {
+    align-items: center;
+    display: flex;
+    gap: .5rem;
+}
+
+#meta > div > div {
+    display: inline-flex;
+    gap: .25rem;
+}
+
+#meta .meta-icon {
+    height: 24px;
+}
+
+#meta p {
+    font-size: .8rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* ------ 6.2: POST TEXT CONTENT ------ */
+#post-content {
+    margin: 2rem 0;
+}
+
+#post-content :is(p, li) {
+    color: var(--wb-content-font-colour);
+    line-height: 1.5rem;
+}
+
+#post-content > h3 {
+    border-bottom: 1px solid #ddd;
+    font-weight: normal;
+    margin: 4rem 0 0;
+    padding-bottom: 1rem;
+}
+
+#post-content > h4 {
+    font-weight: normal;
+    margin-top: 3rem;
+}
+
+#post-content :not(figure) a {
+    border: 1px solid var(--qb-colour-font);
+    border-radius: 0.3rem;
+    color: var(--qb-colour-font);
+    font-weight: bold;
+    padding: 0.2rem;
+    white-space: nowrap;
+}
+
+#post-content :not(figure) a:hover {
+    border-color: var(--qb-colour-accent);
+    color: var(--qb-colour-accent);
+}
+
+#post-content pre {
+    background-color: var(--qb-colour-content-bg-alt);
+    border-radius: .5rem;
+    color: var(--qb-colour-font-alt);
+    line-height: 1.5rem;
+    margin: 2rem 0;
+    padding: .5rem 1rem;
+}
+
+#post-content p > code {
+    font-size: .9rem;
+}
+
+/* ------ 6.3: POST TABLES ------ */
+#post-content table {
+    margin-top: 2rem;
+}
+
+#post-content :is(.wp-block-table) figcaption {
+    margin-bottom: 1rem;
+}
+
+/* ------ 6.4: POST IMAGES ------ */
+#post-content figure:not(.wp-block-table) {
+	margin: 3rem auto;
+    max-width: 700px;
+    text-align: center;
+}
+
+#post-content figure a {
+    border: unset;
+    padding: 0;
+}
+
+#post-content figure img {
+    border-radius: 1rem;
+    max-height: 700px;
+}
+
+figcaption {
+    color: var(--qb-colour-font);
+    font-size: 0.8em;
+	padding: 0.4rem 0;
+    text-align: center;
+}
+
+
+/* ------ 7: RELATED POSTS ------ */
+#related {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+
+/* ----- 8: COMMENTS ----- */
+.comment-list {
+    padding-left: 0;
+}
+
+.comment-list .comment,
+.comment-respond {
+    background: var(--qb-colour-site-bg);
+    border-radius: 1rem;
+    border: 1px solid #ddd;
+    margin: 1rem 0;
+    padding: 1rem;
+}
+
+.comment .comment {
+    margin: 2rem 0 0;
+}
+
+/* ------ 8.1: INDIVIDUAL COMMENT ------ */
+.comment {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.comment > :is(p, .comment, .reply) {
+    width: 100%;
+}
+
+.comment-author {
+    order: -1;
+}
+
+.comment-meta {
+    margin-left: auto;
+}
+
+.comment p {
+    font-size: .9rem;
+    margin: .5rem 0;
+}
+
+.comment p:first-of-type {
+    margin-top: 1.5rem;
+}
+
+.comment p > a {
+    border: 1px solid var(--qb-colour-font);
+    border-radius: 0.3rem;
+    color: var(--qb-colour-font);
+    font-weight: bold;
+    padding: 0.2rem;
+    white-space: nowrap;
+}
+
+.comment p > a:hover {
+    border-color: var(--qb-colour-accent);
+    color: var(--qb-colour-accent);
+}
+
+.comment-author a,
+.comment-meta a:not(.comment-edit-link) {
+    color: var(--qb-colour-font);
+}
+
+.comment-author > img {
+    border-radius: .25rem;
+}
+
+.comment-author > cite {
+    margin-left: .5rem;
+}
+
+/* ------ 8.2: POST AUTHOR COMMENTS ------ */
+.comment .bypostauthor:before {
+    background-color: var(--qb-colour-accent);
+    border-radius: .25rem;
+    content: "Author";
+    color: var(--qb-colour-font-alt);
+    font-size: .9rem;
+    margin: 0 .5rem;
+    padding: .25rem;
+}
+
+.comment .bypostauthor {
+    background: #eee;
+}
+
+/* ------ 8.3: COMMENT BOX BUTTONS ------ */
+.cancel-comment-reply-link,
+.comment-edit-link,
+.comment-reply-link,
+.submit {
+    background-color: var(--qb-colour-accent);
+    border: 0;
+    border-radius: .5rem;
+    color: var(--qb-colour-font-alt);
+    cursor: pointer;
+    font-size: .8rem;
+    padding: .5rem .75rem;
+}
+
+.cancel-comment-reply-link,
+.submit {
+    padding: .75rem 1rem;
+}
+
+.cancel-comment-reply-link:hover,
+.comment-edit-link:hover,
+.comment-reply-link:hover,
+.submit:hover {
+    filter: brightness(1.5);
+    transition: var(--qb-transition);
+}
+
+.cancel-comment-reply-link,
+.form-submit,
+.reply {
+    text-align: right;
+}
+
+/* ------ 8.4: COMMENT FORM ------ */
+.comment-respond {
+    box-shadow: var(--qb-shadow);
+}
+
+.logged-in-as > a {
+    color: var(--qb-colour-font);
+}
+
+.comment-form label {
+    width: 125px;
+}
+
+.comment-form .required-field-message {
+    display: none;
+}
+
+.comment-form textarea,
+.comment-form input[type=text] {
+    padding: .5rem;
+    resize: none;
+    width: 100%;
+}
+
+#comments p[class^='comment-form-'] {
+    align-items: center;
+    display: flex;
+}
+
+#comments p.comment-form-cookies-consent > input {
+    margin-right: 1rem;
+}
+
+#comments p.comment-form-cookies-consent > label {
+    width: 100%;
+}
+
+
+/* ----- 9: TAGS & CATEGORIES ----- */
+.tag,
+.category,
+.tag-cloud-link {
+    background-color: var(--qb-colour-content-bg-alt);
+    border-radius: .25rem;
+    color: var(--qb-colour-font-alt);
+    font-size: .75rem;
+    margin: 0.1rem 0;
+    padding: .25rem;
+    white-space: nowrap;
+}
+
+.tag:hover,
+.category:hover,
+.tag-cloud-link:hover {
+    background: var(--qb-colour-accent);
+    transition: var(--qb-transition);
+}
+
+
+/* ----- 10: SIDEBAR ----- */
+
+/* ------ 10.1: HEADING ELEMENTS ------ */
+#sidebar :is(h1, h2, h3, h4, h5, h6) {
+    font-size: 1rem;
+    font-weight: normal;
+    padding-top: 1rem;
+    text-transform: uppercase;
+}
+
+/* ------ 10.2: LIST ELEMENTS ------ */
+#sidebar :is(ul, ol) {
+    list-style-type: none;
+    margin-bottom: 2rem;
+    padding-left: 0;
+}
+
+#sidebar :is(ul, ol) > li {
+    margin: .5rem 0;
+}
+
+#sidebar :is(ul, ol) > li > a,
+#sidebar :is(ul, ol) > li.wp-block-latest-comments__comment {
+    background: var(--qb-colour-site-bg);
+    border: var(--qb-border);
+    border-radius: .5rem;
+    color: var(--qb-colour-font);
+    display: block;
+    padding: .5rem;    
+}
+
+#sidebar :is(ul, ol) > li > a:hover,
+#sidebar :is(ul, ol) > li.wp-block-latest-comments__comment:hover {
+    background: var(--qb-colour-accent);
+    color: var(--qb-colour-font-alt);
+    cursor: pointer;
+    transition: var(--qb-transition);
+}
+
+/* ------ 10.3: DETAILS ELEMENTS ------ */
+#sidebar div > details {
+    background: var(--qb-colour-site-bg);
+    border: var(--qb-border);
+    border-radius: .5rem;
+    color: var(--qb-colour-font);
+    font-size: .9rem;
+    margin: .5rem 0;
+}
+
+#sidebar details[open] summary ~ * {
+    animation: sweep .5s ease-in-out;
+}
+
+#sidebar details > summary {
+    cursor: pointer;
+    padding: .5rem;
+}
+
+#sidebar details > details > summary {
+    margin: 0 1rem;
+}
+
+#sidebar details > ul {
+    margin: 0;
+}
+
+#sidebar details > ul > li {
+    margin: .25rem .5rem .25rem 2rem;
+}
+
+#sidebar details > ul > li > a {
+    border: unset;
+}
+
+/* ------ 10.4: OTHER SPECIFIC ELEMENTS ------ */
+#sidebar :is(nav, article) a {
+    color: var(--qb-colour-font);
+    text-decoration: none;
+}
+
+/* ------ 10.5: WP BLOCK SPECIFIC ------ */
+#sidebar .wp-block-tag-cloud {
+    text-align: center;
+}
+
+
+/* ----- 11: FOOTER ----- */
+#site-info {
+    background: var(--qb-colour-content-bg-alt);
+    box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
+    color: var(--qb-colour-font-alt);
+    font-size: .8rem;
+    margin: 0;
+    padding: .25rem 0;
+    text-align: center;
+}
+
+
+/* ------ 12: SITE SEARCH ------ */
+:is(.search, .wp-block-search__inside-wrapper) > input {
+    border: var(--qb-border);
+    border-radius: .5rem 0 0 .5rem;
+    box-shadow: var(--qb-shadow);
+    color: var(--qb-colour-font);
+    line-height: 1.5;
+    padding: .5rem .75rem;
+    transition: var(--qb-transition);
+}
+
+:is(.search, .wp-block-search__inside-wrapper) > input:focus {
+    border-color: var(--qb-colour-accent);
+    outline: none;
+}
+
+:is(.search, .wp-block-search__inside-wrapper) > button {
+    align-items: center;
+    background: var(--qb-colour-accent);
+    border: unset;
+    border-radius: 0 .5rem .5rem 0;
+    box-shadow: var(--qb-shadow);
+    display: flex;
+    justify-content: center;
+    transition: var(--qb-transition);
+}
+
+:is(.search, .wp-block-search__inside-wrapper) > button:hover {
+    filter: brightness(1.25);
+}
+
+/* ------ 12.1: HEADER SEARCH ------ */
+#main-header-nav .search {
+    box-shadow: var(--qb-shadow);
+    display: flex;
+}
+
+/* ------ 12.2: WP SEARCH BLOCK ------ */
+.wp-block-search__label {
+    display: none;
+}
+
+.wp-block-search__inside-wrapper {
+    display: flex;
+}
+
+.widget_block.widget_search button {
+    box-shadow: unset;
+    color: var(--qb-colour-font-alt);
+    margin-left: unset;
+}
+
+.wp-block-search__inside-wrapper > input {
+    background-color: var(--qb-colour-site-bg);
+    box-shadow: unset;
+}
+
+
+/* ----- 13: WP BLOCK OVERRIDES ----- */
+/* For default WP block styles that are too specific for our rules to alter. */
+.wp-calendar-table > thead > tr > th {
+    background: var(--qb-colour-content-bg-alt);
+    border: 0;
+}
+
+
+/* ----- 14: ANIMATIONS ----- */
+@keyframes sweep {
+    0% {
+        opacity: 0;
+        translateY: (-10px);
+    }
+
+    100% {
+        opacity: 1;
+        translateY: (0px);
+    }
+}
+
+
+/* ----- 15: RESPONSIVE SIZES ----- */
+@media (min-width: 993px) {
+    /* ----- 4: PAGE CONTAINER ----- */
+    #page-container {
+        border-radius: 1rem;
+        display: grid;
+        grid-gap: 3rem;
+        grid-template-columns: 1fr 20%;
+        width: 85%;
+    }
+}
+
+
+@media (max-width: 992px) {
+    /* ----- 1: SITE WIDE STYLES ----- */
+    nav > ul {
+        text-indent: .5rem;
+    }
+
+
+    /* ----- 2: HEADER ----- */
+    #main-header {
+        padding-right: 0;
+    }
+
+    #main-header .show {
+        display: block;
+    }
+
+    #main-header > button {
+        background-color: unset;
+        border: none;
+        display: block;
+    }
+
+    #main-header > button > img {
+        max-height: 2.5rem;
+        vertical-align: middle;
+    }
+
+    #main-header-nav {
+        display: none;
+    }
+
+    /* ------ 2.2: HEADER PRIMARY NAV ------ */
+    #main-header-nav,
+    #main-header-nav :is(ul, li, form) {
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        padding: 0;
+    }
+
+    #main-header-nav :is(ul, li, form) {
+        margin: 0;
+        min-height: unset;
+    }
+
+    #primary-menu .sub-menu {
+        border: unset;
+        border-radius: unset;
+        position: relative;
+    }
+
+    #primary-menu .active-menu,
+    #primary-menu .menu-item a,
+    #primary-menu .menu-item a:hover,
+    #primary-menu .sub-menu > .menu-item > a {
+        border-radius: unset;
+        height: unset;
+        line-height: 2.5rem;
+        padding: 0;
+    }
+
+    #primary-menu .menu-item-icon-container {
+        align-items: center;
+        color: var(--qb-colour-font-alt);
+        display: flex;
+        height: 2.5rem;
+        padding: 0;
+        width: 3rem;
+    }
+
+
+    /* ----- 5: PAGE CONTENT ----- */
+    .posts-container {
+        grid-gap: 2rem;
+    }
+
+    /* ------ 5.1: POST LIST ------ */
+    .post-container > a {
+        grid-gap: .5rem;
+        grid-template-columns: 1fr;
+    }
+
+    /* ------ 5.2: POST GRID ------ */
+    .posts-container.children {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+    
+    .posts-container > a > h3 {
+        font-size: clamp(1rem, 6vw, 4rem);
+    }
+
+    .posts-container > a > div {
+        aspect-ratio: 5/2;
+    }
+
+
+    /* ------ 6.1: POST META ------ */
+    #meta > div {
+        width: 100%;
+    }
+
+    #meta p {
+        margin: 0;
+    }
+
+
+    /* ------ 7: RELATED POSTS ------ */
+    #related {
+        grid-gap : 1rem;
+        grid-template-columns: unset;
+    }
+
+
+    /* ----- 10: SIDEBAR ----- */
+    #sidebar {
+        margin: 4rem 0;
+    }
+
+
+    /* ------ 12.1: HEADER SEARCH ------ */
+    #main-header-nav .search {
+        padding: 1rem .5rem;
+    }
+
+    #main-header-nav .search > input {
+        flex: 1;
+    }
+
+    #main-header-nav .search > button {
+        flex: 0.1;
+    }
+}
