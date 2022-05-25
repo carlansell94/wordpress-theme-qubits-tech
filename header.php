@@ -103,8 +103,8 @@
     <a id="logo" href="/">
         <?php if( has_custom_logo() ):
             $custom_logo_data = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) , 'full' );
-            $custom_logo_url = $custom_logo_data[0]; ?>
-            <img src="<?= $custom_logo_url ?>" alt="<?= get_bloginfo('name')?> logo">
+			list($logo_url, $logo_width, $logo_height) = $custom_logo_data; ?>
+            <img src="<?= $logo_url ?>" height="<?= $logo_height ?>" width="<?= $logo_width ?>" alt="<?= get_bloginfo('name')?> logo">
         <?php endif; ?>
         <div id="logo-text">
             <p id="logo-site-name"><?= get_bloginfo('name') ?></p>
@@ -112,7 +112,7 @@
         </div>
     </a>
     <button type="button" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <img src="<?php bloginfo('template_url'); ?>/assets/menu.svg" alt="Menu" />
+        <img src="<?php bloginfo('template_url'); ?>/assets/menu.svg" height="1" width="1" alt="Menu" />
     </button>
     <nav id="main-header-nav">
         <?php if (has_nav_menu('main')) {
@@ -126,7 +126,7 @@
         <form class="search" method="get" action="<?= get_site_url() ?>">
             <input type="text" placeholder="Search" aria-label="Search" name="s" value="<?= get_search_query() ?>">
             <button type="submit">
-                <img src="<?php bloginfo('template_url'); ?>/assets/search.svg" alt="Search" />
+                <img src="<?php bloginfo('template_url'); ?>/assets/search.svg" height="1" width="1" alt="Search" />
             </button>
         </form>
     </nav>

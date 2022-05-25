@@ -12,12 +12,12 @@ get_header(); ?>
 	    </header>
 	    <div id="meta">
             <div>
-	            <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/calendar-blk.svg" alt="calendar" />
+	            <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/calendar-blk.svg" height="1" width="1" alt="calendar" />
 	            <p><?= get_the_date() ?></p>
             </div>	    
 		    <?php if ($cats = get_the_category()) : ?>
                 <div>
-                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/categories.svg" alt="categories" />
+                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/categories.svg" height="1" width="1" alt="categories" />
                     <div>
                         <?php foreach ($cats as $cat) : ?>
                             <a class='category' href='<?= get_category_link($cat) ?>'><?= $cat->name ?></a>
@@ -27,7 +27,7 @@ get_header(); ?>
             <?php endif; ?>
             <?php if ($tags = get_the_tags()) : ?>
                 <div>
-                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/tags.svg" alt="tags" />
+                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/tags.svg" height="1" width="1" alt="tags" />
                     <div>
                         <?php foreach ($tags as $tag) : ?>
                             <a class='tag' href='<?= get_tag_link($tag) ?>'><?= $tag->name ?></a>
@@ -37,7 +37,7 @@ get_header(); ?>
             <?php endif; ?>
             <?php if (get_comments_number() != 0) : ?>
                 <div>
-                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/comments.svg" alt="comments" />
+                    <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/comments.svg" height="1" width="1" alt="comments" />
                     <p><?= comments_number() ?>
                 </div>
             <?php endif; ?>

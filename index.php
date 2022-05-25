@@ -35,7 +35,7 @@ get_header(); ?>
                 } ?>
                 <article class="post-container">
                     <div class="post-date">
-                        <img src="<?= bloginfo('template_url') ?>/assets/calendar.svg" alt="calendar-icon" />
+                        <img src="<?= bloginfo('template_url') ?>/assets/calendar.svg" height="1" width="1" alt="calendar-icon" />
                         <?= get_the_date(); ?>
                     </div>
                     <a href=<?= the_permalink() ?>>
@@ -57,6 +57,4 @@ get_header(); ?>
     </main>
     <?php get_sidebar(); ?>
 </div>
-
 <?php get_footer(); ?>
-

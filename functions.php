@@ -97,7 +97,7 @@ add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
 function qb_post_thumbnail(int|WP_Post $post_id) {
     $thumbs = qb_get_post_thumbnail($post_id);
     
-    $image = '<img class="post-thumbnail" src="' . $thumbs['thumb'] . '" srcset="' 
+    $image = '<img class="post-thumbnail" height="1" width="2" src="' . $thumbs['thumb'] . '" srcset="' 
         . $thumbs['thumb_lrg'] . ' 1000w, '
         . $thumbs['thumb_med'] . ' 700w, '
         . $thumbs['thumb'] . ' 400w'
