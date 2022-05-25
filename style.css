@@ -834,6 +834,11 @@ figcaption {
     display: flex;
 }
 
+#main-header-nav .search img {
+    height: 1rem;
+    width: auto;
+}
+
 /* ------ 12.2: WP SEARCH BLOCK ------ */
 .wp-block-search__label {
     display: none;
