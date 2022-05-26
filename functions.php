@@ -16,11 +16,6 @@ function qb_theme_support() {
     add_post_type_support( 'page', 'excerpt' );
 }
 
-function wps_deregister_styles() {
-    
-}
-add_action( 'wp_enqueue_scripts', 'wps_deregister_styles', 100 );
-
 function qb_register_image_sizes() {
     update_option( 'large_size_w', 1000 );
     update_option( 'large_size_h', 1000 );
