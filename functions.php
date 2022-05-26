@@ -94,9 +94,29 @@ function qb_add_image_sizes_filter($wp_image, $context, $id) {
 	return $wp_image;
 }
 
+function qb_add_image_links_filter($wp_image, $context, $id) {
+    if (!$full_src = wp_get_attachment_image_src($id, 'full')) {
+        return $wp_image;
+    }
+
+    $doc = new DOMDocument();
+    $doc->loadHTML($wp_image);
+    $image = $doc->getElementsByTagName('img')[0];
+    $figure = $image->parentNode;
+
+    $a = $doc->createElement('a');
+    $a->setAttribute('href', $full_src[0]);
+
+    $a->appendChild($image);
+    $figure->appendChild($a);
+
+    return $doc->saveHTML();
+}
+
 add_filter( 'wp_list_categories', 'qb_category_count_filter' );
 add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
 add_filter( 'wp_content_img_tag', 'qb_add_image_sizes_filter', 10, 3 );
+add_filter( 'wp_content_img_tag', 'qb_add_image_links_filter', 10, 3 );
 
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
