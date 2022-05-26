@@ -89,27 +89,14 @@ function qb_remove_web_field_filter($fields) {
     return $fields;
 }
 
-function qb_add_image_sizes_filter($wp_content) {
-	$match = '/<img [^>]*?src="(https?:\/\/[^"]+?)"[^>]*?>/iu';
-	preg_match_all($match, $wp_content, $images);
-
-	foreach ($images[0] as $i => $image) {
-		$size = getimagesize($images[1][$i]);
-
-		if (!$size) {
-			continue;
-		}
-
-		$new_image = str_replace('<img', '<img ' . $size[3] . ' ', $images[0][$i]);
-		$wp_content = str_replace($image, $new_image, $wp_content);
-	}
-	
-	return $wp_content;
+function qb_add_image_sizes_filter($wp_image, $context, $id) {
+	wp_img_tag_add_width_and_height_attr($wp_image, $context, $id);
+	return $wp_image;
 }
 
 add_filter( 'wp_list_categories', 'qb_category_count_filter' );
 add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
-add_filter( 'the_content', 'qb_add_image_sizes_filter' );
+add_filter( 'wp_content_img_tag', 'qb_add_image_sizes_filter', 10, 3 );
 
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
