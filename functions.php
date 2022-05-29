@@ -119,17 +119,18 @@ add_filter( 'wp_content_img_tag', 'qb_add_image_links_filter', 10, 3 );
 /* 3. THEME ADDITIONAL FUNCTIONS */
 function qb_post_thumbnail(int|WP_Post $post_id) {
     $thumbs = qb_get_post_thumbnail($post_id);
-    
+
     $image = '<img class="post-thumbnail" height="1" width="2" src="' . $thumbs['thumb'] . '" srcset="' 
         . $thumbs['thumb_lrg'] . ' 1000w, '
-        . $thumbs['thumb_med'] . ' 700w, '
-        . $thumbs['thumb'] . ' 400w'
+        . $thumbs['thumb_med'] . ' 750w, '
+        . $thumbs['thumb'] . ' 375w'
         . '" sizes="
-            (min-width: 3840px) 1000px,
-            (min-width: 1600px) 700px,
-            (min-width: 993px) 400px,
-            (min-width: 701px) 1000px,
-            (max-width: 400px) 400px"
+            (-webkit-min-device-pixel-ratio: 3) and (min-width: 992px) 11.67vw,
+            (-webkit-min-device-pixel-ratio: 2) and (min-width: 992px) 17.5vw,
+            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 35vw,
+            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
+            (-webkit-min-device-pixel-ratio: 2) 50vw,
+            100vw"
             alt="' . get_the_title($post_id) . '">';
 
     return $image;
