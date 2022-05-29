@@ -19,13 +19,15 @@ function qb_theme_support() {
 function qb_register_image_sizes() {
     update_option( 'large_size_w', 1000 );
     update_option( 'large_size_h', 1000 );
-    update_option( 'medium_large_size_w', 700 );
-    update_option( 'medium_large_size_h', 700 );
-    update_option( 'small_size_w', 400 );
-    update_option( 'small_size_h', 400 );
+    update_option( 'medium_large_size_w', 750 );
+    update_option( 'medium_large_size_h', 750 );
+    update_option( 'medium_size_w', 375 );
+    update_option( 'medium_size_h', 375 );
     update_option( 'thumbnail_size_w', 75 );
     update_option( 'thumbnail_size_h', 75 );
     update_option( 'thumbnail_crop', 1 );
+        
+    remove_image_size('1536x1536');
 }
 
 function qb_custom_header_setup() {
