@@ -132,5 +132,12 @@
     </nav>
 </header>
 <?php if (get_header_image()): ?>
-    <img id="banner" src="<?= get_header_image(); ?>" alt="Site banner"/>
+    <?= get_header_image_tag(array(
+            'alt' => 'Site banner',
+            'id' => 'banner',
+            'sizes' => '
+                (min-resolution: 288dpi) 33vw,
+                (min-resolution: 192dpi) 50vw,
+                (min-resolution: 96dpi) 100vh'
+        )); ?>
 <?php endif; ?>

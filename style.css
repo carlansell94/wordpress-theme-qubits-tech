@@ -265,8 +265,9 @@ table > tbody td > a {
 
 /* ----- 3: BANNER ----- */
 #banner {
-    max-width: 100%;
+    height: auto;
     position: absolute;
+    width: 100%;
 }
 
 
