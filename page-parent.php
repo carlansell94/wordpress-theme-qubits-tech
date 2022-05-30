@@ -38,7 +38,7 @@
         <?php $parent_ids = array();
         foreach ($args['qb_pages'] as $qb_page): ?>
             <a href="<?= get_page_link($qb_page) ?>">
-                <div style="background-image: url('<?= qb_get_post_thumbnail($qb_page->ID)['full'] ?>')"></div>
+                <img src="<?= qb_get_post_thumbnail($qb_page->ID)['full'] ?>" alt="<?= get_the_title($qb_page) ?>" />
                 <h3><?= get_the_title($qb_page) ?></h3>
             </a>
             <?php $parent_ids[] = $qb_page->ID; ?>

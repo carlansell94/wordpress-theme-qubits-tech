@@ -359,12 +359,13 @@ table > tbody td > a {
     transition: var(--qb-transition);
 }
 
-.posts-container > a > div {
+.posts-container > a > img {
     aspect-ratio: 3/2;
-    background-position: center;
-    background-size: cover;
     border-radius: 1rem;
     filter: brightness(60%);
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
 }
 
 .posts-container > a > h3 {

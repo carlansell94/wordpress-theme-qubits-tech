@@ -53,7 +53,7 @@ get_header(); ?>
 	            <div class="posts-container" id="related">
 	                <?php foreach ($qb_related_posts as $qb_post): ?>
 	                    <a href="<?= $qb_post['slug'] ?>">
-	                        <div style="background-image: url('<?= $qb_post['thumb'] ?>')"></div>
+                            <img src="<?= $qb_post['thumb'] ?>" alt="<?= $qb_post['title'] ?>" />
 	                        <h3><?= $qb_post['title'] ?></h3>
 	                    </a>
 	                <?php endforeach; ?>

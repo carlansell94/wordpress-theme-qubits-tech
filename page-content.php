@@ -19,7 +19,7 @@
             <section class="posts-container" id="related">
                 <?php foreach ($related_pages as $qb_pages): ?>
                     <a href="<?= $qb_pages['slug'] ?>">
-                        <div style="background-image: url('<?= $qb_pages['thumb'] ?>')"></div>
+                        <img src="<?= $qb_pages['thumb'] ?>" alt="<?= $qb_pages['title'] ?>" />
                         <h3><?= $qb_pages['title'] ?></h3>
                     </a>
                 <?php endforeach; ?>
