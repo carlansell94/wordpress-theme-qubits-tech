@@ -490,7 +490,6 @@ table > tbody td > a {
 /* ------ 6.4: POST IMAGES ------ */
 #post-content figure:not(.wp-block-table) {
 	margin: 3rem auto;
-    max-width: 700px;
     text-align: center;
 }
 
@@ -501,8 +500,9 @@ table > tbody td > a {
 
 #post-content figure img {
     border-radius: 1rem;
-    max-height: 700px;
-	width: auto;
+    height: auto;
+    max-width: 100%;
+	width: 40vw;
 }
 
 figcaption {
@@ -999,6 +999,11 @@ figcaption {
     #meta p {
         margin: 0;
     }
+
+    /* ------ 6.4: POST IMAGES ------ */
+	#post-content figure img {
+		width: 100%;
+	}
 
 
     /* ------ 7: RELATED POSTS ------ */

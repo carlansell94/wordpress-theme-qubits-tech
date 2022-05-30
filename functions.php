@@ -110,10 +110,23 @@ function qb_add_image_links_filter($wp_image, $context, $id) {
     return $doc->saveHTML();
 }
 
+function qb_image_sizes_filter()
+{
+	$sizes = "(-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 13.3vw,
+            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 20vw,
+            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 40vw,
+            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
+            (-webkit-min-device-pixel-ratio: 2) 50vw,
+            100vw";
+	
+	return $sizes;
+}
+
 add_filter( 'wp_list_categories', 'qb_category_count_filter' );
 add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
 add_filter( 'wp_content_img_tag', 'qb_add_image_sizes_filter', 10, 3 );
 add_filter( 'wp_content_img_tag', 'qb_add_image_links_filter', 10, 3 );
+add_filter( 'wp_calculate_image_sizes', 'qb_srcset_sizes_filter' );
 
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
