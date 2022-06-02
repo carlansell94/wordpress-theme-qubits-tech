@@ -988,7 +988,7 @@ figcaption {
         font-size: clamp(1rem, 6vw, 4rem);
     }
 
-    .posts-container > a > div {
+    .posts-container > a > img {
         aspect-ratio: 5/2;
     }
 

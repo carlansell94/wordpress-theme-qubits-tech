@@ -38,7 +38,16 @@
         <?php $parent_ids = array();
         foreach ($args['qb_pages'] as $qb_page): ?>
             <a href="<?= get_page_link($qb_page) ?>">
-                <img src="<?= qb_get_post_thumbnail($qb_page->ID)['full'] ?>" alt="<?= get_the_title($qb_page) ?>" />
+                <img src="<?= qb_get_post_thumbnail($qb_page->ID)['full'] ?>"
+                    srcset="<?= wp_get_attachment_image_srcset(get_post_thumbnail_id($qb_page->ID)) ?>"
+					sizes="(-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 5vw,
+            			(-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 7.5vw,
+            			(-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
+            			(-webkit-min-device-pixel-ratio: 3) 33.3vw,
+            			(-webkit-min-device-pixel-ratio: 2) 50vw,
+            			100vw"
+                    alt="<?= get_the_title($qb_page) ?>"
+                />
                 <h3><?= get_the_title($qb_page) ?></h3>
             </a>
             <?php $parent_ids[] = $qb_page->ID; ?>

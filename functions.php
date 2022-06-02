@@ -214,6 +214,8 @@ function qb_get_related(array $args, int $limit)
     while ($related->have_posts() && ($limit === -1 || $count < $limit)) { 
         $related->the_post();
         $thumb = get_the_post_thumbnail_url();
+		$id = get_post_thumbnail_id();
+		$srcset = wp_get_attachment_image_srcset($id);
             
         if ($thumb == '') {
             $thumb = get_template_directory_uri() . '/assets/post-thumb-default-400x200.webp';
@@ -222,7 +224,14 @@ function qb_get_related(array $args, int $limit)
         $qb_post = array(
             'title' => get_the_title(),
             'slug' => get_page_link(),
-            'thumb' => $thumb
+            'thumb' => $thumb,
+            'srcset' => $srcset,
+			'sizes' => '(-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 5vw,
+                (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 7.5vw,
+                (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
+                (-webkit-min-device-pixel-ratio: 3) 33.3vw,
+                (-webkit-min-device-pixel-ratio: 2) 50vw,
+                100vw'
         );
             
         $qb_post_list[] = $qb_post;
