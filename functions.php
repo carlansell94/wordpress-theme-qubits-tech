@@ -137,8 +137,8 @@ function qb_post_thumbnail(int|WP_Post $post_id) {
         . $thumbs['thumb_med'] . ' 750w, '
         . $thumbs['thumb'] . ' 375w'
         . '" sizes="
-            (-webkit-min-device-pixel-ratio: 3) and (min-width: 992px) 11.67vw,
-            (-webkit-min-device-pixel-ratio: 2) and (min-width: 992px) 17.5vw,
+            (-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 11.67vw,
+            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 17.5vw,
             (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 35vw,
             (-webkit-min-device-pixel-ratio: 3) 33.3vw,
             (-webkit-min-device-pixel-ratio: 2) 50vw,
