@@ -150,7 +150,7 @@ function qb_post_thumbnail(int|WP_Post $post_id) {
 
 function qb_get_post_thumbnail(int|WP_Post $post_id) {
     $themedir = get_template_directory_uri();
-    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'small' );
+    $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium' );
 
     if (!$thumb || $thumb[0] == '') {
         $thumb = $themedir . '/assets/post-thumb-default-400x200.webp';
