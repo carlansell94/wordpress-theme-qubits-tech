@@ -153,8 +153,8 @@ function qb_get_post_thumbnail(int|WP_Post $post_id) {
     $thumb = wp_get_attachment_image_src( get_post_thumbnail_id( $post_id ), 'medium' );
 
     if (!$thumb || $thumb[0] == '') {
-        $thumb = $themedir . '/assets/post-thumb-default-400x200.webp';
-        $thumb_med = $themedir . '/assets/post-thumb-default-700x350.webp';
+        $thumb = $themedir . '/assets/post-thumb-default-375x188.webp';
+        $thumb_med = $themedir . '/assets/post-thumb-default-750x375.webp';
         $thumb_lrg = $themedir . '/assets/post-thumb-default-1000x500.webp';
         $full = $themedir . '/assets/post-thumb-default.webp';
     } else {
