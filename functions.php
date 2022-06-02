@@ -124,9 +124,8 @@ function qb_image_sizes_filter()
 
 add_filter( 'wp_list_categories', 'qb_category_count_filter' );
 add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
-add_filter( 'wp_content_img_tag', 'qb_add_image_sizes_filter', 10, 3 );
 add_filter( 'wp_content_img_tag', 'qb_add_image_links_filter', 10, 3 );
-add_filter( 'wp_calculate_image_sizes', 'qb_srcset_sizes_filter' );
+add_filter( 'wp_calculate_image_sizes', 'qb_image_sizes_filter' );
 
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
