@@ -5,7 +5,7 @@ Theme Name: Qubits Tech
 Author: Qubits & Bytes
 Author URI: https://qubitsandbytes.co.uk/
 Description: Theme for the Qubits & Bytes site
-Version: 0.2
+Version: 0.3~dev
 Tested up to: 6.0
 */
 
@@ -115,8 +115,15 @@ main h2 {
     display: none;
 }
 
+figure:has(table) {
+    margin-left: unset;
+    margin-right: unset;
+}
+
 table {
     background-color: var(--qb-colour-site-bg);
+    border-collapse: collapse;
+    width: 100%;
 }
 
 table > thead {
@@ -129,16 +136,17 @@ table > tfoot {
     line-height: 2rem;
 }
 
-table > tbody tr:nth-child(2n) {
+table > tbody tr:nth-child(2n-1) {
     background-color: #eee;
 }
 
 table > tbody td {
-    padding: .5rem 0;
+    padding: .5rem;
 }
 
 table > tbody td > a {
     color: var(--qb-colour-accent);
+    overflow-wrap: anywhere;
 }
 
 
@@ -459,7 +467,6 @@ table > tbody td > a {
     color: var(--qb-colour-font);
     font-weight: bold;
     padding: 0.2rem;
-    white-space: nowrap;
 }
 
 #post-content :not(figure) a:hover {
