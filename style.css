@@ -790,6 +790,7 @@ figcaption {
 
 /* ------ 10.5: WP BLOCK SPECIFIC ------ */
 #sidebar .wp-block-tag-cloud {
+	line-height: 2.5rem;
     text-align: center;
 }
 
@@ -906,6 +907,10 @@ figcaption {
 
 @media (max-width: 992px) {
     /* ----- 1: SITE WIDE STYLES ----- */
+	html {
+		font-size: 18px;
+	}
+	
     nav > ul {
         text-indent: .5rem;
     }
@@ -935,6 +940,13 @@ figcaption {
     #main-header-nav {
         display: none;
     }
+	
+	/* ------ 2.1: HEADER LOGO ------ */
+	#main-header #logo-site-tagline {
+		font-size: .675rem;
+		line-height: 1rem;
+		text-transform: uppercase;
+	}
 
     /* ------ 2.2: HEADER PRIMARY NAV ------ */
     #main-header-nav,
@@ -1020,12 +1032,26 @@ figcaption {
         grid-gap : 1rem;
         grid-template-columns: unset;
     }
+	
+	
+	/* ----- 9: TAGS & CATEGORIES ----- */
+	.tag,
+	.category,
+	.tag-cloud-link {
+		padding: 0.5rem;
+		margin: 0.25rem;
+	}
 
 
     /* ----- 10: SIDEBAR ----- */
     #sidebar {
         margin: 4rem 0;
     }
+	
+	/* ------ 10.5: WP BLOCK SPECIFIC ------ */
+	#sidebar .wp-block-tag-cloud {
+		line-height: 3rem;
+	}
 
 
     /* ------ 12.1: HEADER SEARCH ------ */
