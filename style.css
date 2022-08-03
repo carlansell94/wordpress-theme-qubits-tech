@@ -149,6 +149,10 @@ table > tbody td > a {
     overflow-wrap: anywhere;
 }
 
+.screen-reader-text {
+    display: none;
+}
+
 
 /* ----- 2: HEADER ----- */
 #main-header {
