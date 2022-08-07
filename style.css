@@ -403,6 +403,11 @@ table > tbody td > a {
     padding: .5rem 1rem;
 }
 
+.pagination a.page-numbers:hover {
+    filter: brightness(0.9);
+    transition: var(--qb-transition);
+}
+
 .pagination .page-numbers.current {
     background: var(--qb-colour-accent);
     color: var(--qb-colour-font-alt);
@@ -428,7 +433,8 @@ table > tbody td > a {
 }
 
 #meta > div > div {
-    display: inline-flex;
+    display: flex;
+	flex-wrap: wrap;
     gap: .25rem;
 }
 
@@ -479,12 +485,13 @@ table > tbody td > a {
 }
 
 #post-content pre {
-    background-color: var(--qb-colour-content-bg-alt);
+    background-color: #222;
     border-radius: .5rem;
     color: var(--qb-colour-font-alt);
     line-height: 1.5rem;
     margin: 2rem 0;
     padding: .5rem 1rem;
+    white-space: pre-wrap;
 }
 
 #post-content p > code {
@@ -672,6 +679,7 @@ figcaption {
 
 .comment-form textarea,
 .comment-form input[type=text] {
+    border: 1px solid #999;
     padding: .5rem;
     resize: none;
     width: 100%;
@@ -808,6 +816,10 @@ figcaption {
     margin: 0;
     padding: .25rem 0;
     text-align: center;
+}
+
+#site-info > a {
+	color: inherit;
 }
 
 
@@ -1024,6 +1036,12 @@ figcaption {
 
     #meta p {
         margin: 0;
+    }
+
+    /* ------ 6.3: POST TABLES ------ */
+    figure.wp-block-table {
+        margin-left: unset;
+        margin-right: unset;
     }
 
     /* ------ 6.4: POST IMAGES ------ */
