@@ -28,6 +28,7 @@ function qb_register_image_sizes() {
     update_option( 'thumbnail_crop', 1 );
         
     remove_image_size('1536x1536');
+    add_filter( 'big_image_size_threshold', '__return_false' );
 }
 
 function qb_custom_header_setup() {
