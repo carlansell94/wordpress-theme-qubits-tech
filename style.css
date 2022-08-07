@@ -449,7 +449,7 @@ table > tbody td > a {
 }
 
 #post-content :is(p, li) {
-    color: var(--wb-content-font-colour);
+    color: var(--qb-colour-font);
     line-height: 1.5rem;
 }
 
