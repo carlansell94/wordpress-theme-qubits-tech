@@ -846,6 +846,7 @@ figcaption {
 #main-header-nav .search {
     box-shadow: var(--qb-shadow);
     display: flex;
+    margin: 0;
 }
 
 #main-header-nav .search img {
