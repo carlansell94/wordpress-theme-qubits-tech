@@ -277,6 +277,7 @@ table > tbody td > a {
     height: auto;
     position: absolute;
     width: 100%;
+    z-index: -1;
 }
 
 
@@ -676,6 +677,7 @@ figcaption {
 
 .comment-form textarea,
 .comment-form input[type=text] {
+    background-color: #fff;
     border: 1px solid #999;
     color: var(--qb-colour-font);
     padding: .5rem;

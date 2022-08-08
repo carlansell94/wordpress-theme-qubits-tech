@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+/*
+Theme Name: Qubits Tech
+Author: Qubits & Bytes
+Author URI: https://qubitsandbytes.co.uk/
+Description: Dark theme for the Qubits & Bytes site
+Version: 0.3~dev
+Tested up to: 6.0
+*/
+
+
+@media (prefers-color-scheme: dark) {
+    /* ----- 0: SITE VARIABLES ----- */
+    :root {
+        --qb-colour-content-bg: #333;
+        --qb-colour-content-bg-offset: #444;
+        --qb-colour-font: #fff;
+        --qb-border: 1px solid #333;
+    }
+
+
+    /* ----- 1: SITE WIDE STYLES ----- */
+    body {
+        background-color: #121212;
+    }
+
+    p,
+    #post-content.li,
+    .post-container .excerpt {
+        opacity: 0.85;
+    }
+
+    table > tbody tr:nth-child(2n-1) {
+        background-color: #555;
+    }
+
+
+    /* ----- 4: PAGE CONTAINER ----- */
+    #page-container header > h1,
+    #post-content > h3 {
+        border-bottom: 1px solid #444;
+    }
+
+
+    /* ------ 5.3: PAGINATION ------ */
+    .pagination a.page-numbers:hover {
+        filter: brightness(1.2);
+    }
+
+
+    /* ------ 6.1: POST META ------ */
+    #meta .meta-icon {
+        filter: invert(0.75);
+    }
+
+    /* ------ 6.2: POST TEXT CONTENT ------ */
+    #post-content :not(figure) a:hover {
+        filter: brightness(2);
+    }
+
+    /* ------ 6.4: POST IMAGES ------ */
+    figcaption {
+        opacity: 0.75;
+    }
+
+
+    /* ------ 8.4: COMMENT FORM ------ */
+    .comment-form textarea,
+    .comment-form input[type=text] {
+        background-color: #555;
+    }
+}
