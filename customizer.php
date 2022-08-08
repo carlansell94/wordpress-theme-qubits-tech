@@ -148,5 +148,20 @@ function qb_customizer_colours($wp_customize)
     }
 }
 
+function qb_customizer_live_preview()
+{
+	wp_enqueue_script( 
+		'qb_customizer_live_preview',
+		get_template_directory_uri() . '/js/customizer.js',
+		array(
+            'jquery',
+            'customize-preview'
+        ),
+		'',
+		true
+	);
+}
+
 add_action( 'wp_head', 'qb_customizer_css' );
 add_action( 'customize_register', 'qb_customizer_colours' );
+add_action( 'customize_preview_init', 'qb_customizer_live_preview' );
