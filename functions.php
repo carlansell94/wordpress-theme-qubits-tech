@@ -3,6 +3,7 @@
  * @package QubitsTech
  */
 
+require_once 'customizer.php';
 
 /* 1. THEME WP SUPPORT */
 function qb_theme_support() {
