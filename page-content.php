@@ -17,14 +17,10 @@
         <aside>
             <h2>Related Tutorials:</h2>
             <section class="posts-container" id="related">
-                <?php foreach ($related_pages as $qb_pages): ?>
-                    <a href="<?= $qb_pages['slug'] ?>">
-                        <img src="<?= $qb_pages['thumb'] ?>"
-                            srcset="<?= $qb_pages['srcset'] ?>"
-                            sizes="<?= $qb_pages['sizes'] ?>"
-                            alt="<?= $qb_pages['title'] ?>"
-                        />
-                        <h3><?= $qb_pages['title'] ?></h3>
+                <?php foreach ($related_pages as $qb_page_id): ?>
+                    <a href="<?= get_page_link($qb_page_id) ?>">
+                        <?= qb_get_related_page_thumbnail($qb_page_id); ?>
+                        <h3><?= get_the_title($qb_page_id) ?></h3>
                     </a>
                 <?php endforeach; ?>
             </section>

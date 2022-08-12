@@ -225,37 +225,53 @@ function qb_get_related(array $args, int $limit)
     }
 
     $qb_post_list = array();
-    $count = 0;
 
-    while ($related->have_posts() && ($limit === -1 || $count < $limit)) { 
+    while ($related->have_posts() && ($limit !== 0)) { 
         $related->the_post();
-        $thumb = get_the_post_thumbnail_url();
-		$id = get_post_thumbnail_id();
-		$srcset = wp_get_attachment_image_srcset($id);
-            
-        if ($thumb == '') {
-            $thumb = get_template_directory_uri() . '/assets/post-thumb-default-400x200.webp';
-        }
-            
-        $qb_post = array(
-            'title' => get_the_title(),
-            'slug' => get_page_link(),
-            'thumb' => $thumb,
-            'srcset' => $srcset,
-			'sizes' => '(-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 5vw,
-                (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 7.5vw,
-                (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
-                (-webkit-min-device-pixel-ratio: 3) 33.3vw,
-                (-webkit-min-device-pixel-ratio: 2) 50vw,
-                100vw'
-        );
-            
-        $qb_post_list[] = $qb_post;
-        $count++;
+        $qb_post_list[] = get_the_ID();
+        $limit--;
     }
 
     wp_reset_query();
+
     return $qb_post_list;
+}
+
+function qb_get_related_page_thumbnail(int|WP_Post $post_id)
+{
+    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
+        $post_id = wp_get_post_parent_id($post_id);
+    }
+
+    return qb_related_thumbnail($post_id);
+}
+
+function qb_related_thumbnail(int|WP_Post $post_id)
+{
+    $thumbs = qb_get_post_thumbnail($post_id);
+
+    if (!$thumbs) {
+        return '<img class="related-thumbnail">';
+    }
+
+    return '<img'
+        . ' class="related-thumbnail"'
+        . ' height="2"'
+        . ' width="3"'
+        . ' src="' . $thumbs['thumb'] . '"'
+        . ' srcset="'
+            . $thumbs['thumb_lrg'] . ' 1000w, '
+            . $thumbs['thumb_med'] . ' 750w, '
+            . $thumbs['thumb'] . ' 375w"'
+        . ' sizes="
+            (-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 5vw,
+            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 7.5vw,
+            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
+            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
+            (-webkit-min-device-pixel-ratio: 2) 50vw,
+            100vw'
+        . 'alt=' . get_the_title($post_id)
+        . '">';
 }
 
 function qb_latest_pages(array $parent_ids = null) {

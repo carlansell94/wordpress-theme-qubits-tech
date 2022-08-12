@@ -538,6 +538,9 @@ figcaption {
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.related-thumbnail {
+    background-color: var(--qb-media-post-thumb-bg);
+}
 
 /* ----- 8: COMMENTS ----- */
 .comment-list {

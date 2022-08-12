@@ -51,15 +51,11 @@ get_header(); ?>
 	        <aside>
 	            <h2>Related Posts:</h2>
 	            <div class="posts-container" id="related">
-	                <?php foreach ($qb_related_posts as $qb_post): ?>
-	                    <a href="<?= $qb_post['slug'] ?>">
-                            <img src="<?= $qb_post['thumb'] ?>"
-                                srcset="<?= $qb_post['srcset'] ?>"
-                                sizes="<?= $qb_post['sizes'] ?>"
-                                alt="<?= $qb_post['title'] ?>"
-                            />
-	                        <h3><?= $qb_post['title'] ?></h3>
-	                    </a>
+	                <?php foreach ($qb_related_posts as $qb_post_id): ?>
+	                    <a href="<?= get_page_link($qb_post_id) ?>">
+                            <?= qb_related_thumbnail($qb_post_id); ?>
+                            <h3><?= get_the_title($qb_post_id) ?></h3>
+                        </a>
 	                <?php endforeach; ?>
 	            </div>
 	        </aside>
