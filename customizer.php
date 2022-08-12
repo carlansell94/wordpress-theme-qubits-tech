@@ -26,6 +26,8 @@ function qb_customizer_css()
                 <?= get_theme_mod('colour_footer_font', '#fff') ?>;
             --qb-colour-footer-bg:
                 <?= get_theme_mod('colour_footer_bg', '#222') ?>;
+            --qb-media-post-thumb-bg:
+                <?= get_theme_mod('media_post_thumb_bg', '#bbb') ?>;
         }
     </style>
     <?php
@@ -148,6 +150,57 @@ function qb_customizer_colours($wp_customize)
     }
 }
 
+function qb_customizer_media($wp_customize)
+{
+    $wp_customize->add_section(
+        'media',
+        array(
+            'title' => 'Media'
+        )
+    );
+
+    $wp_customize->add_setting(
+        'media_default_post_thumb'
+    );
+
+    $wp_customize->add_control(
+        new WP_Customize_Cropped_Image_Control(
+            $wp_customize,
+            'media_default_post_thumb',
+            array(
+                'label' => __( 'Default Post/Article Thumbnail', 'qb' ),
+                'description' => 'Select a default thumbnail to show if a post/
+                    article thumbnail is not set.',
+                'section' => 'media',
+                'width' => 1500,
+                'height' => 750
+            )
+        )
+    );
+
+    $wp_customize->add_setting(
+        'media_post_thumb_bg',
+        array(
+            'default'   => '#ddd',
+            'transport' => 'postMessage'
+        )
+    );
+
+    $wp_customize->add_control(
+        new WP_Customize_Color_Control(
+            $wp_customize,
+            'media_post_thumb_bg',
+            array(
+                'label' => __( 'Default Post/Article Thumbnail Colour', 'qb' ),
+                'description' => 'Select a colour to show, either as a
+                    background for transparent thumbnails, or as a thumbnail
+                    where an image is not set.',
+                'section' => 'media'
+            )
+        )
+    );
+}
+
 function qb_customizer_live_preview()
 {
 	wp_enqueue_script( 
@@ -164,4 +217,5 @@ function qb_customizer_live_preview()
 
 add_action( 'wp_head', 'qb_customizer_css' );
 add_action( 'customize_register', 'qb_customizer_colours' );
+add_action( 'customize_register', 'qb_customizer_media' );
 add_action( 'customize_preview_init', 'qb_customizer_live_preview' );

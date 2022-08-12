@@ -60,3 +60,10 @@ wp.customize('colour_footer_bg', function(value) {
             .setProperty('--qb-colour-footer-bg', newval);
     });
 });
+
+wp.customize('media_post_thumb_bg', function(value) {
+    value.bind(function(newval) {
+        document.documentElement.style
+            .setProperty('--qb-media-post-thumb-bg', newval);
+    });
+});

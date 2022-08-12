@@ -328,6 +328,7 @@ table > tbody td > a {
 }
 
 .post-container .post-thumbnail {
+    background-color: var(--qb-media-post-thumb-bg);
     border-radius: 1rem;
     box-shadow: var(--qb-shadow);
     width: 100%;
