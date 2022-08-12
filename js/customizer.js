@@ -1,3 +1,28 @@
+wp.customize('site_copyright', function(value) {
+    value.bind( function(newval) {
+        document.querySelector('#copyright-text').innerHTML = newval;
+    });
+});
+
+wp.customize('site_show_dates', function(value) {
+    value.bind( function(newval) {
+        const element = document.querySelector('#copyright-year');
+        newval ? element.style.display = 'inline' :
+            element.style.display = 'none';
+        
+    });
+});
+
+wp.customize('site_start_year', function(value) {
+    value.bind(function(newval) {
+        const element = document.querySelector('#copyright-year');
+        const year = new Date().getFullYear();
+
+        newval >= year ? element.innerHTML = year :
+            element.innerHTML = newval + ' - ' + year;
+    });
+});
+
 wp.customize('colour_site_accent', function(value) {
     value.bind(function(newval) {
         document.documentElement.style

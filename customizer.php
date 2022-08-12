@@ -33,6 +33,67 @@ function qb_customizer_css()
     <?php
 }
 
+function qb_customizer_site_info($wp_customize)
+{
+    $wp_customize->get_setting('header_textcolor')->transport = 'postMessage';
+
+    $controls = array(
+        'site_copyright'    => array(
+            'default'       => 'Copyright &copy;',
+            'control_settings'  => array(
+                'label'     => __( 'Copyright Text', 'qb' ),
+                'priority'  => 50
+            )
+        ),
+        'site_start_year'   => array(
+            'default'           => 1,
+            'sanitize_callback' => 'absint',
+            'control_settings'  => array(
+                'label'         => __( 'Site Start Year', 'qb' ),
+                'type'          => 'number',
+                'priority'      => 50,
+                'input_attrs'   => array(
+                    'min' => 1980,
+                    'max' => date('Y')
+                )
+            )
+        ),
+        'site_show_dates'  => array(
+            'default'       => 1,
+            'control_settings'  => array(
+                'label'     => __('Display Site Start Year In Footer', 'qb' ),
+                'type'      => 'checkbox',
+                'priority'  => 50
+            )
+        ),
+    );
+
+    foreach ($controls as $name => $settings) {
+        $settings['control_settings'] += array(
+            'section'       => 'title_tagline',
+            'settings'      => $name
+        );
+
+        if (isset($settings['sanitize_callback'])) {
+            $settings['control_settings'] += array(
+                'sanitize_callback' => 'absint');
+        }
+    
+        $wp_customize->add_setting(
+            $name,
+            array(
+                'default'   => $settings['default'],
+                'transport' => 'postMessage'
+            )
+        );
+
+        $wp_customize->add_control(
+            $name,
+            $settings['control_settings']
+        );
+    }
+}
+
 function qb_customizer_colours($wp_customize)
 {
     $colour_controls = array(
@@ -237,6 +298,7 @@ function qb_customizer_live_preview()
 }
 
 add_action( 'wp_head', 'qb_customizer_css' );
+add_action( 'customize_register', 'qb_customizer_site_info' );
 add_action( 'customize_register', 'qb_customizer_colours' );
 add_action( 'customize_register', 'qb_customizer_media' );
 add_action( 'customize_preview_init', 'qb_customizer_live_preview' );
