@@ -159,6 +159,15 @@ function qb_post_thumbnail(int|WP_Post $post_id)
         . '">';
 }
 
+function qb_page_thumbnail(int|WP_Post $post_id)
+{
+    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
+        $post_id = wp_get_post_parent_id($post_id);
+    }
+
+    return qb_post_thumbnail($post_id);
+}
+
 function qb_get_post_thumbnail(int|WP_Post $post_id)
 {
     $img_id = get_post_thumbnail_id( $post_id );

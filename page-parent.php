@@ -21,7 +21,7 @@
         <?php foreach ($args['qb_pages'] as $qb_page): ?>
             <article class="post-container">
                 <a href="<?= get_page_link($qb_page) ?>">
-                    <?= qb_post_thumbnail($qb_page) ?>
+                    <?= qb_page_thumbnail($qb_page) ?>
                     <div>
                         <h3><?= get_the_title($qb_page) ?></h3>
                         <?php if (wp_get_post_parent_id()): ?>
@@ -62,7 +62,7 @@
                 <?php $qb_pages->the_post(); ?>
                 <article class="post-container">
                     <a href="<?= get_page_link() ?>">
-                        <?= qb_post_thumbnail(get_the_ID()) ?>
+                        <?= qb_page_thumbnail(get_the_ID()) ?>
                         <div>
                             <h3><?= the_title() ?></h3>
                             <p><?= the_excerpt() ?></p>

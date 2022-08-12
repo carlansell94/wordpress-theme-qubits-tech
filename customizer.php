@@ -179,6 +179,27 @@ function qb_customizer_media($wp_customize)
     );
 
     $wp_customize->add_setting(
+        'media_page_default_to_parent_thumb',
+        array(
+            'default'   => 1,
+            'transport' => 'postMessage'
+        )
+    );
+
+    $wp_customize->add_control(
+        'media_page_default_to_parent_thumb',
+        array(
+            'label' => __( 'Use Parent Page Thumbnail as Default Page 
+                Thumbnail', 'qb' ),
+            'description' => 'If a page has a parent, use the thumbnail 
+                of the parent page as the default thumbnail instead of 
+                the post default.',
+            'type' => 'checkbox',
+            'section' => 'media'
+        )
+    );
+
+    $wp_customize->add_setting(
         'media_post_thumb_bg',
         array(
             'default'   => '#ddd',
