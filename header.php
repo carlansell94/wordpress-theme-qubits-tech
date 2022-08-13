@@ -109,7 +109,7 @@
 			list($logo_url, $logo_width, $logo_height) = $custom_logo_data; ?>
             <img src="<?= $logo_url ?>" height="<?= $logo_height ?>" width="<?= $logo_width ?>" alt="<?= get_bloginfo('name')?> logo">
         <?php endif; ?>
-        <div id="logo-text">
+        <div id="logo-text" <?php if (!display_header_text()) {echo "style='display:none'";} ?>>
             <p id="logo-site-name"><?= get_bloginfo('name') ?></p>
             <p id="logo-site-tagline"><?= get_bloginfo('description') ?></p>
         </div>
