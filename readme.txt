@@ -10,6 +10,13 @@ A simple yet elegent theme designed for the Qubits & Bytes blog.
 
 == Changelog ==
 
+= 0.3 =
+* Add fallback post/page thumbnail settings to WP customiser
+* Add styling options to WP customiser
+* Add dark theme
+* Remove large image size limit to allow full-size images
+* Minor bug fixes
+
 = 0.2 =
 * Added srcset to img tags to improve performance
 * Added sizes to images and icons to reduce content shift

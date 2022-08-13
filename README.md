@@ -13,6 +13,8 @@ Features:
 * Support for a page hierarchy of up to 3 levels
 * Bespoke SVG icons
 * Responsive images
+* Dark theme, triggered by browser settings
+* Customiser support
 
 The custom archive block can be accessed using the shortcode [qb_archive]. It lists posts by year, with months and individual posts accessible through a slide-down menu.
 
@@ -36,12 +38,10 @@ Utilises the srcset attribute to serve appropriately sized images. Device pixel 
 ## Future Plans
 * Add animations to navigation menu
 * Post grid layout
-* Dark theme
-* Theme customisation using 'WP Customizer'
 
 
 ## Theme Tweaks
-The theme makes use of CSS variables, which are defined at the start of style.css. To tweak the side-wide colour scheme, tweak these values to suit.
+This theme supports customisation using the Wordpress customiser.
 
 
 ## How To Use
