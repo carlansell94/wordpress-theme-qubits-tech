@@ -213,12 +213,7 @@ function qb_customizer_colours($wp_customize)
 
 function qb_customizer_media($wp_customize)
 {
-    $wp_customize->add_section(
-        'media',
-        array(
-            'title' => 'Media'
-        )
-    );
+    $wp_customize->get_section('header_image')->title = __( 'Media' );
 
     $wp_customize->add_setting(
         'media_default_post_thumb'
@@ -232,7 +227,7 @@ function qb_customizer_media($wp_customize)
                 'label' => __( 'Default Post/Article Thumbnail', 'qb' ),
                 'description' => 'Select a default thumbnail to show if a post/
                     article thumbnail is not set.',
-                'section' => 'media',
+                'section' => 'header_image',
                 'width' => 1500,
                 'height' => 750
             )
@@ -255,7 +250,7 @@ function qb_customizer_media($wp_customize)
                 of the parent page as the default thumbnail instead of 
                 the post default.',
             'type' => 'checkbox',
-            'section' => 'media'
+            'section' => 'header_image'
         )
     );
 
@@ -276,7 +271,7 @@ function qb_customizer_media($wp_customize)
                 'description' => 'Select a colour to show, either as a
                     background for transparent thumbnails, or as a thumbnail
                     where an image is not set.',
-                'section' => 'media'
+                'section' => 'header_image'
             )
         )
     );
