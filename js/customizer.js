@@ -1,3 +1,13 @@
+wp.customize('header_textcolor', function(value) {
+    value.bind(function(newval) {
+        newval === 'blank' ? display = 'none' : display = 'block';
+
+        document.querySelector('#logo-text').style
+            .setProperty('display', display);
+        }
+    );
+});
+
 wp.customize('site_copyright', function(value) {
     value.bind( function(newval) {
         document.querySelector('#copyright-text').innerHTML = newval;
