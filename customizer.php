@@ -242,8 +242,7 @@ function qb_customizer_media($wp_customize)
     $wp_customize->add_setting(
         'media_page_default_to_parent_thumb',
         array(
-            'default'   => 1,
-            'transport' => 'postMessage'
+            'default'   => 1
         )
     );
 
