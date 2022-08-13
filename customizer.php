@@ -283,11 +283,19 @@ function qb_customizer_live_preview()
 		'qb_customizer_live_preview',
 		get_template_directory_uri() . '/js/customizer.js',
 		array(
-            'jquery',
             'customize-preview'
-        ),
-		'',
-		true
+        )
+	);
+}
+
+function qb_customizer_dynamic_settings()
+{
+	wp_enqueue_script( 
+		'qb_customizer_dynamic_settings',
+		get_template_directory_uri() . '/js/customizer-dynamic.js',
+		array(
+            'customize-preview'
+        )
 	);
 }
 
@@ -296,3 +304,5 @@ add_action( 'customize_register', 'qb_customizer_site_info' );
 add_action( 'customize_register', 'qb_customizer_colours' );
 add_action( 'customize_register', 'qb_customizer_media' );
 add_action( 'customize_preview_init', 'qb_customizer_live_preview' );
+add_action( 'customize_controls_enqueue_scripts',
+    'qb_customizer_dynamic_settings' );
