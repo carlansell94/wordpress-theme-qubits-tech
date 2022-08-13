@@ -96,6 +96,8 @@ function qb_customizer_site_info($wp_customize)
 
 function qb_customizer_colours($wp_customize)
 {
+    $wp_customize->remove_control('header_textcolor');
+
     $colour_controls = array(
         'colour_site_accent'    => array(
             'default'           => '#800080',
@@ -113,7 +115,7 @@ function qb_customizer_colours($wp_customize)
                     search box, and archive/category/tag on-hover background.'
             )
         ),
-        'header_textcolor'      => array(
+        'colour_header_font'    => array(
             'default'           => '#fff',
             'control_settings'  => array(
                 'label'         => __( 'Header Font Colour', 'qb' ),
