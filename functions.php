@@ -144,7 +144,7 @@ function qb_post_thumbnail(int|WP_Post $post_id)
     $thumbs = qb_get_post_thumbnail($post_id);
 
     if (!$thumbs) {
-        return '<img class="post-thumbnail" height="1" width="2">';
+        return '<div class="post-thumbnail" height="1" width="2"></div>';
     }
 
     return '<img'
@@ -277,8 +277,8 @@ function qb_related_thumbnail(int|WP_Post $post_id)
             (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
             (-webkit-min-device-pixel-ratio: 3) 33.3vw,
             (-webkit-min-device-pixel-ratio: 2) 50vw,
-            100vw'
-        . 'alt=' . get_the_title($post_id)
+            100vw"'
+        . ' alt="' . get_the_title($post_id)
         . '">';
 }
 

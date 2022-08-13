@@ -13,7 +13,7 @@ get_header(); ?>
 	    <div id="meta">
             <div>
 	            <img class="meta-icon" src="<?= get_bloginfo('template_url') ?>/assets/calendar-blk.svg" height="1" width="1" alt="calendar" />
-	            <p><?= get_the_date() ?></p>
+	            <p id="meta-date"><?= get_the_date() ?></p>
             </div>	    
 		    <?php if ($cats = get_the_category()) : ?>
                 <div>

@@ -328,6 +328,7 @@ table > tbody td > a {
 }
 
 .post-container .post-thumbnail {
+    aspect-ratio: auto 2/1;
     background-color: var(--qb-media-post-thumb-bg);
     border-radius: 1rem;
     box-shadow: var(--qb-shadow);
@@ -447,6 +448,10 @@ table > tbody td > a {
     font-size: .8rem;
     font-weight: bold;
     white-space: nowrap;
+}
+
+#meta p#meta-date {
+    color: var(--qb-colour-font);
 }
 
 /* ------ 6.2: POST TEXT CONTENT ------ */
@@ -1002,13 +1007,16 @@ figcaption {
 
     #primary-menu .menu-item-icon-container {
         align-items: center;
-        color: var(--qb-colour-font-alt);
+        color: var(--qb-colour-header-font);
         display: flex;
         height: 2.5rem;
-        padding: 0;
         width: 3rem;
     }
 
+    #primary-menu .menu-item-icon {
+        color: var(--qb-colour-header-font);
+    }
+    
 
     /* ----- 5: PAGE CONTENT ----- */
     .posts-container {
