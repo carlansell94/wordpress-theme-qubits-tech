@@ -71,11 +71,19 @@ function qb_widgets_setup() {
 	));
 }
 
+function qb_deregister_styles()
+{
+    wp_deregister_style( 'wp-block-library' );
+}
+
 add_action( 'after_setup_theme', 'qb_theme_support' );
 add_action( 'after_setup_theme', 'qb_register_image_sizes' );
 add_action( 'after_setup_theme', 'qb_custom_header_setup' );
 add_action( 'after_setup_theme', 'qb_nav_setup' );
 add_action( 'after_setup_theme', 'qb_widgets_setup' );
+add_action( 'wp_enqueue_scripts', 'qb_deregister_styles' );
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
 
 
 /* 2. WP FUNCTION FILTERS */
