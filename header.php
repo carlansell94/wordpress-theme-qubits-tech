@@ -103,7 +103,7 @@
     </head>
 <body>
 <header id="main-header">
-    <a id="logo" href="/">
+    <a id="logo" href="<?= get_option( 'siteurl' ) ?>">
         <?php if( has_custom_logo() ):
             $custom_logo_data = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ) , 'full' );
 			list($logo_url, $logo_width, $logo_height) = $custom_logo_data; ?>
