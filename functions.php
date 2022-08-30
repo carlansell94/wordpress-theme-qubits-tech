@@ -245,15 +245,6 @@ function qb_get_related(array $args, int $limit)
     return $qb_post_list;
 }
 
-function qb_get_related_page_thumbnail(int|WP_Post $post_id)
-{
-    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
-        $post_id = wp_get_post_parent_id($post_id);
-    }
-
-    return qb_related_thumbnail($post_id);
-}
-
 function qb_related_thumbnail(int|WP_Post $post_id)
 {
     $thumbs = qb_get_post_thumbnail($post_id);
