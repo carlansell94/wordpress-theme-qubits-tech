@@ -277,6 +277,25 @@ function qb_customizer_media($wp_customize)
             )
         )
     );
+
+    $wp_customize->add_setting(
+        'media_ignore_pixel_density',
+        array(
+            'default'   => 0
+        )
+    );
+
+    $wp_customize->add_control(
+        'media_ignore_pixel_density',
+        array(
+            'label' => __( 'Ignore pixel density', 'qb' ),
+            'description' => 'When enabled, media queries calculate
+                screen width using a 1x pixel density. Results in smaller
+                but lower quality images on high density displays.',
+            'type' => 'checkbox',
+            'section' => 'header_image'
+        )
+    );
 }
 
 function qb_customizer_live_preview()
