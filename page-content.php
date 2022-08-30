@@ -19,7 +19,7 @@
             <section class="posts-container" id="related">
                 <?php foreach ($related_pages as $qb_page_id): ?>
                     <a href="<?= get_page_link($qb_page_id) ?>">
-                        <?= qb_get_related_page_thumbnail($qb_page_id); ?>
+                        <?= qb_page_thumbnail($qb_page_id); ?>
                         <h3><?= get_the_title($qb_page_id) ?></h3>
                     </a>
                 <?php endforeach; ?>

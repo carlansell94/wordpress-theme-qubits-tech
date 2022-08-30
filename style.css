@@ -372,8 +372,9 @@ table > tbody td > a {
     transition: var(--qb-transition);
 }
 
-.posts-container > a > img {
+.posts-container > a > :is(div, img) {
     aspect-ratio: 3/2;
+    background-color: var(--qb-media-post-thumb-bg);
     border-radius: 1rem;
     filter: brightness(60%);
     height: 100%;
@@ -1038,7 +1039,7 @@ figcaption {
         font-size: clamp(1rem, 6vw, 4rem);
     }
 
-    .posts-container > a > img {
+    .posts-container > a > :is(div, img) {
         aspect-ratio: 5/2;
     }
 

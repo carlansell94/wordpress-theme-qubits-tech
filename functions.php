@@ -122,14 +122,7 @@ function qb_add_image_links_filter($wp_image, $context, $id) {
 
 function qb_image_sizes_filter()
 {
-	$sizes = "(-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 13.3vw,
-            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 20vw,
-            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 40vw,
-            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
-            (-webkit-min-device-pixel-ratio: 2) 50vw,
-            100vw";
-	
-	return $sizes;
+    return qb_get_srcset_sizes(vw: 40);
 }
 
 add_filter( 'wp_list_categories', 'qb_category_count_filter' );
@@ -139,50 +132,33 @@ add_filter( 'wp_calculate_image_sizes', 'qb_image_sizes_filter' );
 
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
-function qb_post_thumbnail(int|WP_Post $post_id)
+function qb_post_thumbnail(int|WP_Post $post_id): string
 {
-    $thumbs = qb_get_post_thumbnail($post_id);
-
-    if (!$thumbs) {
-        return '<div class="post-thumbnail" height="1" width="2"></div>';
+    if ($thumbs = qb_get_post_thumbnail($post_id)) {
+        return qb_get_img_tag(
+            thumbs: $thumbs,
+            vw: 35,
+            class: 'post-thumbnail',
+            alt: get_the_title($post_id),
+            height: 1,
+            width: 2
+        );
     }
 
-    return '<img'
-        . ' class="post-thumbnail"'
-        . ' height="1"'
-        . ' width="2"'
-        . ' src="' . $thumbs['thumb'] . '"'
-        . ' srcset="'
-            . $thumbs['thumb_lrg'] . ' 1000w, '
-            . $thumbs['thumb_med'] . ' 750w, '
-            . $thumbs['thumb'] . ' 375w"'
-        . ' sizes="
-            (-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 11.67vw,
-            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 17.5vw,
-            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 35vw,
-            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
-            (-webkit-min-device-pixel-ratio: 2) 50vw,
-            100vw"'
-        . 'alt=' . get_the_title($post_id)
-        . '">';
+    return qb_get_img_fallback_tag(
+        class: 'post-thumbnail',
+        height: 1,
+        width: 2
+    );
 }
 
-function qb_page_thumbnail(int|WP_Post $post_id)
+function qb_get_post_thumbnail(int|WP_Post $post_id): array|bool
 {
-    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
-        $post_id = wp_get_post_parent_id($post_id);
-    }
-
-    return qb_post_thumbnail($post_id);
-}
-
-function qb_get_post_thumbnail(int|WP_Post $post_id)
-{
-    $img_id = get_post_thumbnail_id( $post_id );
-    $thumb = wp_get_attachment_image_src( $img_id, 'medium' );
+    $img_id = get_post_thumbnail_id($post_id);
+    $thumb = wp_get_attachment_image_src($img_id, 'medium');
 
     if (!$thumb || $thumb[0] == '') {
-        $img_id = get_theme_mod( 'media_default_post_thumb' );
+        $img_id = get_theme_mod('media_default_post_thumb');
 
         if (!$img_id) {
             return false;
@@ -195,6 +171,93 @@ function qb_get_post_thumbnail(int|WP_Post $post_id)
         'thumb_lrg' => wp_get_attachment_image_src($img_id, 'large')[0],
         'full' => wp_get_attachment_image_src($img_id, 'full')[0]
     );
+}
+
+function qb_page_thumbnail(int|WP_Post $post_id): string
+{
+    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
+        $post_id = wp_get_post_parent_id($post_id);
+    }
+
+    return qb_post_thumbnail($post_id);
+}
+
+function qb_related_thumbnail(int|WP_Post $post_id): string
+{
+    if ($thumbs = qb_get_post_thumbnail($post_id)) {
+        return qb_get_img_tag(
+            thumbs: $thumbs,
+            vw: 15,
+            class: 'related-thumbnail',
+            alt: get_the_title($post_id),
+            height: 2,
+            width: 3
+        );
+    }
+    
+    return qb_get_img_fallback_tag(
+        class: 'related-thumbnail',
+        height: 2,
+        width: 3
+    );
+}
+
+function qb_get_img_tag(array|string $thumbs, int $vw, ...$attrs): string
+{
+    if (is_array($thumbs)) {
+        $attrs += qb_get_srcset(thumbs: $thumbs);
+        $attrs['sizes'] = qb_get_srcset_sizes(vw: $vw);
+    } else {
+        $attrs['src'] = $thumbs;
+    }
+
+    $tag = '';
+
+    foreach ($attrs as $attr => $value) {
+        $tag .= " $attr=\"$value\"";
+    }
+
+    return '<img' . $tag . '>';
+}
+
+function qb_get_img_fallback_tag(...$attrs): string
+{
+    $tag = '';
+
+    foreach ($attrs as $attr => $value) {
+        $tag .= " $attr=\"$value\"";
+    }
+
+    return '<div' . $tag . '></div>';
+}
+
+function qb_get_srcset(array $thumbs): array
+{
+    return array(
+        'src' => $thumbs['thumb'],
+        'srcset' =>
+            $thumbs['thumb_lrg'] . ' 1000w, '
+          . $thumbs['thumb_med'] . ' 750w, '
+          . $thumbs['thumb'] . ' 375w'
+    );
+}
+
+function qb_get_srcset_sizes(int $vw): string
+{
+    if (get_theme_mod('media_ignore_pixel_density')) {
+        return '
+            (-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) '
+                . $vw / 3 . 'vw,
+            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) '
+                . $vw / 2 . 'vw,
+            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) '
+                . $vw . 'vw,
+            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
+            (-webkit-min-device-pixel-ratio: 2) 50vw,
+            100vw';
+    }
+
+    return '(min-width: 993px) ' . $vw . 'vw, 100vw';
 }
 
 function qb_related_posts(int $limit = -1)
@@ -243,34 +306,6 @@ function qb_get_related(array $args, int $limit)
     wp_reset_query();
 
     return $qb_post_list;
-}
-
-function qb_related_thumbnail(int|WP_Post $post_id)
-{
-    $thumbs = qb_get_post_thumbnail($post_id);
-
-    if (!$thumbs) {
-        return '<img class="related-thumbnail">';
-    }
-
-    return '<img'
-        . ' class="related-thumbnail"'
-        . ' height="2"'
-        . ' width="3"'
-        . ' src="' . $thumbs['thumb'] . '"'
-        . ' srcset="'
-            . $thumbs['thumb_lrg'] . ' 1000w, '
-            . $thumbs['thumb_med'] . ' 750w, '
-            . $thumbs['thumb'] . ' 375w"'
-        . ' sizes="
-            (-webkit-min-device-pixel-ratio: 3) and (min-width: 993px) 5vw,
-            (-webkit-min-device-pixel-ratio: 2) and (min-width: 993px) 7.5vw,
-            (-webkit-max-device-pixel-ratio: 1) and (min-width: 993px) 15vw,
-            (-webkit-min-device-pixel-ratio: 3) 33.3vw,
-            (-webkit-min-device-pixel-ratio: 2) 50vw,
-            100vw"'
-        . ' alt="' . get_the_title($post_id)
-        . '">';
 }
 
 function qb_latest_pages(array $parent_ids = null) {
