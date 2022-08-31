@@ -135,12 +135,20 @@
     </nav>
 </header>
 <?php if (get_header_image()): ?>
-    <?= get_header_image_tag(array(
-            'alt' => 'Site banner',
-            'id' => 'banner',
-            'sizes' => '
+    <?php 
+        if (!get_theme_mod('media_ignore_pixel_density')) {
+            $sizes = '100vw';
+        } else {
+            $sizes = '
                 (min-resolution: 288dpi) 33vw,
                 (min-resolution: 192dpi) 50vw,
-                (min-resolution: 96dpi) 100vh'
-        )); ?>
+                (min-resolution: 96dpi) 100vw';
+        }
+    
+        echo get_header_image_tag(array(
+            'alt' => 'Site banner',
+            'id' => 'banner',
+            'sizes' => $sizes
+        )); 
+    ?>
 <?php endif; ?>
