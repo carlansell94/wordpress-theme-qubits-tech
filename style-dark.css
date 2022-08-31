@@ -5,7 +5,7 @@ Theme Name: Qubits Tech
 Author: Qubits & Bytes
 Author URI: https://qubitsandbytes.co.uk/
 Description: Dark theme for the Qubits & Bytes site
-Version: 0.3~dev
+Version: 0.4~dev
 Tested up to: 6.0
 */
 
@@ -55,7 +55,8 @@ Tested up to: 6.0
     }
 
     /* ------ 6.2: POST TEXT CONTENT ------ */
-    #post-content :not(figure) a:hover {
+    #post-content :not(figure) a:hover,
+    .comment > p a:hover {
         filter: brightness(2);
     }
 
@@ -64,6 +65,16 @@ Tested up to: 6.0
         opacity: 0.75;
     }
 
+
+    /* ------ 8.1: INDIVIDUAL COMMENT ------ */
+    .comment-list .comment, .comment-respond {
+        border-color: #444;
+    }
+
+    /* ------ 8.2: POST AUTHOR COMMENTS ------ */
+    .comment .bypostauthor {
+        background: #555;
+    }
 
     /* ------ 8.4: COMMENT FORM ------ */
     .comment-form textarea,

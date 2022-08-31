@@ -103,6 +103,10 @@ main h2 {
     padding-bottom: 1rem;
 }
 
+main > header {
+    min-height: 4.5rem;
+}
+
 :is(h1, h2, h3, h4, h5, h6).hidden-header {
     display: none;
 }
@@ -122,14 +126,14 @@ table {
     width: 100%;
 }
 
-table > thead {
+table > :is(thead, tfoot) {
     background-color: var(--qb-colour-content-meta-bg);
     color: var(--qb-colour-content-meta-font);
     line-height: 2rem;
 }
 
 table > tfoot {
-    line-height: 2rem;
+    text-align: center;
 }
 
 table > tbody tr:nth-child(2n-1) {
@@ -446,14 +450,10 @@ table > tbody td > a {
 }
 
 #meta p {
-    color: var(--qb-colour-content-meta-font);
+    color: var(--qb-colour-font);
     font-size: .8rem;
     font-weight: bold;
     white-space: nowrap;
-}
-
-#meta p#meta-date {
-    color: var(--qb-colour-font);
 }
 
 /* ------ 6.2: POST TEXT CONTENT ------ */
@@ -468,12 +468,14 @@ table > tbody td > a {
 
 #post-content > h3 {
     border-bottom: 1px solid #ddd;
+    font-size: 1.5rem;
     font-weight: normal;
     margin: 4rem 0 0;
     padding-bottom: 1rem;
 }
 
 #post-content > h4 {
+    font-size: 1.2rem;
     font-weight: normal;
     margin-top: 3rem;
 }
@@ -557,6 +559,7 @@ figcaption {
 .comment-list .comment,
 .comment-respond {
     background: var(--qb-colour-content-bg-offset);
+    border: 1px solid #ddd;
     border-radius: 1rem;
     margin: 1rem 0;
     padding: 1rem;
@@ -578,6 +581,7 @@ figcaption {
 }
 
 .comment-author {
+    display: flex;
     order: -1;
 }
 
@@ -618,7 +622,13 @@ figcaption {
 }
 
 .comment-author > cite {
+    align-items: center;
+    display: flex;
     margin-left: .5rem;
+}
+
+span.says {
+    display: none;
 }
 
 /* ------ 8.2: POST AUTHOR COMMENTS ------ */
@@ -688,7 +698,6 @@ figcaption {
 
 .comment-form textarea,
 .comment-form input[type=text] {
-    background-color: #fff;
     border: 1px solid #999;
     color: var(--qb-colour-font);
     padding: .5rem;
