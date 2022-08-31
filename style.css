@@ -328,10 +328,11 @@ table > tbody td > a {
 }
 
 .post-container .post-thumbnail {
-    aspect-ratio: auto 2/1;
+    aspect-ratio: 2/1;
     background-color: var(--qb-media-post-thumb-bg);
     border-radius: 1rem;
     box-shadow: var(--qb-shadow);
+    object-fit: cover;
     width: 100%;
 	height: auto;
 }
