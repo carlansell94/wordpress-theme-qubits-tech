@@ -12,21 +12,38 @@
     <head>
         <meta charset="<?php bloginfo( 'charset' ); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="site_name" property="og:site_name" content="<?= get_bloginfo('name') ?>">
+        <?php if (is_home()): ?>
+            <meta name="title" property="og:title" content="<?= get_bloginfo('name') ?>">
+            <meta name="description" property="og:description" content="<?= get_bloginfo('description') ?>">
+        <?php else: ?>
+            <meta name="url" property="og:url" content="<?=get_permalink() ?>">
+            <meta name="title" property="og:title" content="<?= the_title() ?>">
+            <?php if (has_excerpt()): ?>
+                <meta name="description" property="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>">
+            <?php endif; ?>
+            <meta name="image" property="og:image" content="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>">
+            <meta name="type" property="og:type" content="article">
+            <meta property="article:published_time" content="<?= get_post_time("Y-m-d") ?>">
+            <?php if (has_tag()):
+                $keywords = array();
+                foreach (get_the_tags() as $tag):
+                    $keywords[] = $tag->name; ?>
+                    <meta property="article:tag" content="<?= $tag->name ?>">
+                <?php endforeach; ?>
+                <meta name="keywords" content="<?= implode(',', $keywords) ?>">
+            <?php endif; ?>
+        <?php endif; ?>
+        <?php if (get_theme_mod('colour_browser_theme_preference', true)): ?>
+            <meta name="color-scheme" content="light dark">
+            <link rel="stylesheet" href="<?= get_stylesheet_directory_uri() . '/style-dark.css'; ?>">
+        <?php endif; ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
-        <?php if (get_theme_mod('colour_browser_theme_preference', true)): ?>
-                <link rel="stylesheet" href="<?= get_stylesheet_directory_uri() . '/style-dark.css'; ?>">
-        <?php endif; ?>
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-        <?php if ( has_excerpt() || !is_home()): ?>
-            <meta name="description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>" />
-            <meta name="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>" />
-            <meta name="og:type" content="article" />
-            <meta name="og:image" content="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>" />
-        <?php endif; ?>
         <script>
             window.addEventListener('load', () => {
                 const mainHeader = document.querySelector('#main-header');
