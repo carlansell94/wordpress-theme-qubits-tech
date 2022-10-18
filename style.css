@@ -36,9 +36,8 @@ Tested up to: 6.0
 10: SIDEBAR
     10.1: HEADING ELEMENTS
     10.2: LIST ELEMENTS
-    10.3: DETAILS ELEMENTS
-    10.4: OTHER SPECIFIC ELEMENTS
-    10.5: WP BLOCK SPECIFIC
+    10.3: OTHER SPECIFIC ELEMENTS
+    10.4: WP BLOCK SPECIFIC
 11: FOOTER
 12: SITE SEARCH
     12.1 HEADER SEARCH
@@ -780,48 +779,13 @@ span.says {
     transition: var(--qb-transition);
 }
 
-/* ------ 10.3: DETAILS ELEMENTS ------ */
-#sidebar div > details {
-    background: var(--qb-colour-content-bg-offset);
-    border: var(--qb-border);
-    border-radius: .5rem;
-    color: var(--qb-colour-font);
-    font-size: .9rem;
-    margin: .5rem 0;
-}
-
-#sidebar details[open] summary ~ * {
-    animation: sweep .5s ease-in-out;
-}
-
-#sidebar details > summary {
-    cursor: pointer;
-    padding: .5rem;
-}
-
-#sidebar details > details > summary {
-    margin: 0 1rem;
-}
-
-#sidebar details > ul {
-    margin: 0;
-}
-
-#sidebar details > ul > li {
-    margin: .25rem .5rem .25rem 2rem;
-}
-
-#sidebar details > ul > li > a {
-    border: unset;
-}
-
-/* ------ 10.4: OTHER SPECIFIC ELEMENTS ------ */
-#sidebar :is(nav, article) a {
+/* ------ 10.3: OTHER SPECIFIC ELEMENTS ------ */
+div.widget_block :is(nav, article) a {
     color: var(--qb-colour-font);
     text-decoration: none;
 }
 
-/* ------ 10.5: WP BLOCK SPECIFIC ------ */
+/* ------ 10.4: WP BLOCK SPECIFIC ------ */
 #sidebar .wp-block-tag-cloud {
 	line-height: 2.5rem;
     text-align: center;
