@@ -743,7 +743,7 @@ span.says {
 /* ----- 10: SIDEBAR ----- */
 
 /* ------ 10.1: HEADING ELEMENTS ------ */
-#sidebar :is(h1, h2, h3, h4, h5, h6) {
+div.widget_block :is(h1, h2, h3, h4, h5, h6) {
     font-size: 1rem;
     font-weight: normal;
     padding-top: 1rem;
@@ -751,18 +751,18 @@ span.says {
 }
 
 /* ------ 10.2: LIST ELEMENTS ------ */
-#sidebar :is(ul, ol) {
+div.widget_block :is(ul, ol) {
     list-style-type: none;
     margin-bottom: 2rem;
     padding-left: 0;
 }
 
-#sidebar :is(ul, ol) > li {
+div.widget_block :is(ul, ol) > li {
     margin: .5rem 0;
 }
 
-#sidebar :is(ul, ol) > li > a,
-#sidebar :is(ul, ol) > li.wp-block-latest-comments__comment {
+div.widget_block :is(ul, ol) > li > a,
+div.widget_block :is(ul, ol) > li.wp-block-latest-comments__comment {
     background: var(--qb-colour-content-bg-offset);
     border: var(--qb-border);
     border-radius: .5rem;
@@ -771,8 +771,8 @@ span.says {
     padding: .5rem;    
 }
 
-#sidebar :is(ul, ol) > li > a:hover,
-#sidebar :is(ul, ol) > li.wp-block-latest-comments__comment:hover {
+div.widget_block :is(ul, ol) > li > a:hover,
+div.widget_block :is(ul, ol) > li.wp-block-latest-comments__comment:hover {
     background: var(--qb-colour-accent);
     color: var(--qb-colour-accent-font);
     cursor: pointer;
@@ -786,7 +786,7 @@ div.widget_block :is(nav, article) a {
 }
 
 /* ------ 10.4: WP BLOCK SPECIFIC ------ */
-#sidebar .wp-block-tag-cloud {
+div.widget_block .wp-block-tag-cloud {
 	line-height: 2.5rem;
     text-align: center;
 }
@@ -1061,7 +1061,7 @@ div.widget_block :is(nav, article) a {
     }
 	
 	/* ------ 10.5: WP BLOCK SPECIFIC ------ */
-	#sidebar .wp-block-tag-cloud {
+	div.widget_block .wp-block-tag-cloud {
 		line-height: 3rem;
 	}
 
