@@ -21,4 +21,7 @@ endif; ?>
         ?>
     </ol>
     <?php comment_form(); ?>
+    <?php if (!comments_open()): ?>
+        <div id="comments-closed">Comments on this post are now closed.</div>
+    <?php endif; ?>
 </aside>

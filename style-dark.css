@@ -67,7 +67,9 @@ Tested up to: 6.0
 
 
     /* ------ 8.1: INDIVIDUAL COMMENT ------ */
-    .comment-list .comment, .comment-respond {
+    #comments-closed,
+    .comment-list .comment,
+    .comment-respond {
         border-color: #444;
     }
 

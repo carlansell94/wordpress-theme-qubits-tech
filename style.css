@@ -568,6 +568,14 @@ figcaption {
     margin: 2rem 0 0;
 }
 
+#comments-closed {
+    background-color: var(--qb-colour-content-bg-offset);
+    border: 1px solid #ddd;
+    border-radius: 1rem;
+    padding: 1rem;
+    text-align: center;
+}
+
 /* ------ 8.1: INDIVIDUAL COMMENT ------ */
 .comment {
     align-items: center;
