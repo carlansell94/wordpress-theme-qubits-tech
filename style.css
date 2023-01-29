@@ -480,8 +480,8 @@ table > tbody td > a {
 }
 
 #post-content :not(figure) a {
-    border: 1px solid var(--qb-colour-font);
-    border-radius: 0.3rem;
+    border-bottom: 1px solid var(--qb-colour-font);
+    border-top: 1px solid var(--qb-colour-font);
     color: var(--qb-colour-font);
     font-weight: bold;
     padding: 0.2rem;
@@ -598,11 +598,11 @@ figcaption {
 }
 
 .comment p > a {
-    border: 1px solid var(--qb-colour-font);
-    border-radius: 0.3rem;
+    border-bottom: 1px solid var(--qb-colour-font);
+    border-top: 1px solid var(--qb-colour-font);
     color: var(--qb-colour-font);
     font-weight: bold;
-    padding: 0.2rem;
+    padding: 0.1rem;
     white-space: nowrap;
 }
 
