@@ -33,6 +33,25 @@
                 <?php endforeach; ?>
                 <meta name="keywords" content="<?= implode(',', $keywords) ?>">
             <?php endif; ?>
+            <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "<?php if (get_post_type() == 'page') {echo "Article";} else {echo "BlogPosting";} ?>",
+                "headline": "<?= the_title() ?>",
+                "image": [
+                    "<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>"
+                ],
+                "datePublished": "<?= get_post_time("Y-m-d\TH:i:s+00:00") ?>",
+                "dateModified": "<?= get_the_modified_date("Y-m-d\TH:i:s+00:00") ?>",
+                "author": [{
+                    "@type": "Organization",
+                    "name": "<?= get_bloginfo('name') ?>",
+                    "url": "<?= get_site_url() ?>"
+                }],
+                "commentCount": <?= get_comments_number() ?>,
+                "keywords": "<?php if (isset($keywords)) {echo implode(',', $keywords);} ?>"
+            }
+            </script>
         <?php endif; ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
