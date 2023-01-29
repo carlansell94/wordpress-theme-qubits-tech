@@ -34,14 +34,14 @@
                 <meta name="keywords" content="<?= implode(',', $keywords) ?>">
             <?php endif; ?>
         <?php endif; ?>
-        <?php if (get_theme_mod('colour_browser_theme_preference', true)): ?>
-            <meta name="color-scheme" content="light dark">
-            <link rel="stylesheet" href="<?= get_stylesheet_directory_uri() . '/style-dark.css'; ?>">
-        <?php endif; ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>">
+        <?php if (get_theme_mod('colour_browser_theme_preference', true)): ?>
+            <meta name="color-scheme" content="light dark">
+            <link rel="stylesheet" href="<?= get_stylesheet_directory_uri() . '/style-dark.css'; ?>">
+        <?php endif; ?>
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
         <script>
