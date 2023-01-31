@@ -46,6 +46,9 @@ get_header(); ?>
             <h2 class="hidden-header">Content:</h2>
 		    <?php the_content(); ?>
 		</article>
+        <div id="content-end">
+	        <?php dynamic_sidebar( 'content-end' ); ?>
+        </div>
 	    <nav><?= wp_link_pages(); ?></nav>
 	    <?php if ($qb_related_posts = qb_related_posts(3)): ?>
 	        <aside>

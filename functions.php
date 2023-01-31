@@ -62,6 +62,14 @@ function qb_widgets_setup() {
         'after_widget'  => '</div>'
 	));
 
+    register_sidebar(array(
+        'name'          => esc_html__( 'Content End Widgets', 'qb' ),
+        'id'            => 'content-end',
+        'description'   => esc_html__( 'Widget area, designed for display below post/page content.', 'qb' ),
+        'before_widget' => '<div class="%2$s">',
+        'after_widget'  => '</div>'
+	));
+
 	register_sidebar(array(
         'name'          => esc_html__( 'Footer Widgets', 'qb' ),
         'id'            => 'footer-main',

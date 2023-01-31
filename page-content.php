@@ -11,7 +11,9 @@
     <?php the_content(); ?>
 </article>
 <nav><?= wp_link_pages(); ?></nav>
-			    
+<div id="content-end">
+	<?php dynamic_sidebar( 'content-end' ); ?>
+</div>    
 <?php if (wp_get_post_parent_id()): ?>
     <?php if ($related_pages = qb_related_pages(3)): ?>
         <aside>
