@@ -10,6 +10,14 @@ A simple yet elegent theme designed for the Qubits & Bytes blog.
 
 == Changelog ==
 
+= 0.4 =
+* Open Tag support
+* Structured data support
+* Added widget area after post/page content
+* Added WP customiser setting to control image pixel density
+* Removed archive short code - custom archive now available as a plugin
+* Minor bug fixes
+
 = 0.3 =
 * Add fallback post/page thumbnail settings to WP customiser
 * Add styling options to WP customiser
