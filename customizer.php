@@ -248,9 +248,8 @@ function qb_customizer_media($wp_customize)
         array(
             'label' => __( 'Use Parent Page Thumbnail as Default Page 
                 Thumbnail', 'qb' ),
-            'description' => 'If a page has a parent, use the thumbnail 
-                of the parent page as the default thumbnail instead of 
-                the post default.',
+            'description' => 'If a page has a parent and no thumbnail is assigned, 
+                assign the thumbnail of the parent page.',
             'type' => 'checkbox',
             'section' => 'header_image'
         )

@@ -90,6 +90,8 @@ add_action( 'after_setup_theme', 'qb_custom_header_setup' );
 add_action( 'after_setup_theme', 'qb_nav_setup' );
 add_action( 'after_setup_theme', 'qb_widgets_setup' );
 add_action( 'wp_enqueue_scripts', 'qb_deregister_styles' );
+add_action( 'pre_post_update', 'qb_set_current_post_thumbnail_id' );
+add_action( 'wp_after_insert_post', 'qb_assign_child_page_thumbnail' );
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('wp_print_styles', 'print_emoji_styles');
 
@@ -160,6 +162,51 @@ function qb_post_thumbnail(int|WP_Post $post_id): string
     );
 }
 
+function qb_set_current_post_thumbnail_id(int|WP_Post $post_id): void
+{
+    update_post_meta($post_id, '_old_featured_image_id', get_post_thumbnail_id($post_id));
+}
+
+function qb_assign_child_page_thumbnail(int|WP_Post $post_id): void
+{
+    $auto_assign_enabled = get_option('media_page_default_to_parent_thumb', 'off');
+
+    if (!$auto_assign_enabled || wp_is_post_autosave($post_id)) {
+        return;
+    }
+    
+    // Update page to use parent thumbnail if one has not been set
+    if (!has_post_thumbnail($post_id)) {
+        $parent_id = wp_get_post_parent_id($post_id);
+
+        if (!$parent_id || !has_post_thumbnail($parent_id)) {
+            return;
+        }
+
+        $parent_featured_image_id = get_post_thumbnail_id($parent_id);
+        set_post_thumbnail($post_id, $parent_featured_image_id);
+    }
+    
+    // Update child pages with the old parent thumbnail assigned to the updated thumbnail    
+    $child_pages = get_children(array(
+        'post_parent' => $post_id,
+        'post_type' => 'page',
+        'post_status' => 'publish',
+        'numberposts' => -1,
+    ));
+    
+    $featured_image_id = get_post_thumbnail_id($post_id);
+    $previous_featured_image_id = get_post_meta($post_id, '_old_featured_image_id', true);
+
+    foreach ($child_pages as $child) {
+        $current_child_featured_image_id = get_post_thumbnail_id($child->ID);
+
+        if ($current_child_featured_image_id == $previous_featured_image_id) {
+            set_post_thumbnail($child->ID, $featured_image_id);
+        }
+    }
+}
+
 function qb_get_post_thumbnail(int|WP_Post $post_id): array|bool
 {
     $img_id = get_post_thumbnail_id($post_id);
@@ -183,10 +230,6 @@ function qb_get_post_thumbnail(int|WP_Post $post_id): array|bool
 
 function qb_page_thumbnail(int|WP_Post $post_id): string
 {
-    if (get_theme_mod('media_page_default_to_parent_thumb', true)) {
-        $post_id = wp_get_post_parent_id($post_id);
-    }
-
     return qb_post_thumbnail($post_id);
 }
 
