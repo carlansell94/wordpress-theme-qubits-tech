@@ -25,14 +25,23 @@
             <meta name="image" property="og:image" content="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>">
             <meta name="type" property="og:type" content="article">
             <meta property="article:published_time" content="<?= get_post_time("Y-m-d") ?>">
-            <?php if (has_tag()):
-                $keywords = array();
+<?php $keywords = array();
+if (has_tag()):
                 foreach (get_the_tags() as $tag):
                     $keywords[] = $tag->name; ?>
                     <meta property="article:tag" content="<?= $tag->name ?>">
-                <?php endforeach; ?>
+    <?php endforeach;
+endif ?>
+<?php if (get_theme_mod( 'site_meta_content_keywords', true )):
+    $content_keywords = get_post_meta($post->ID, '_post_keywords', true);
+    $content_keywords = !empty($content_keywords) ? explode(';', $content_keywords) : [];
+
+    foreach ($content_keywords as $keyword):
+        $keywords[] = $keyword; ?>
+        <meta property="article:tag" content="<?= $keyword ?>">
+    <?php endforeach;
+endif ?>
                 <meta name="keywords" content="<?= implode(',', $keywords) ?>">
-            <?php endif; ?>
             <script type="application/ld+json">
             {
                 "@context": "https://schema.org",

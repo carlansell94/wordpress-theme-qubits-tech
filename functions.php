@@ -381,3 +381,50 @@ function qb_list_child_pages() {
     
     return get_pages( 'sort_column=menu_order&title_li=&parent=' . $id . '&echo=0' );
 }
+
+/* 4. Additional Editor Features */
+
+/* 4.1 Post Keywords */
+function render_keywords_meta_box($post) {
+    $keywords = get_post_meta($post->ID, '_post_keywords', true); ?>
+
+    <div id="keyword-meta-box">
+    	<p>Add keywords to use for post/page SEO. Not visible to readers - use tags for public keywords.</p>
+    	<div>
+        	<input type="text" id="keyword-new" name="new_keyword" />
+        	<button type="button" id="keyword-add">Add</button>
+        </div>
+        <ul id="keyword-list"></ul>
+        <input type="hidden" id="post-keywords" name="post_keywords" value="<?= esc_attr($keywords) ?>" />
+    </div>
+    <?php
+}
+
+function add_keywords_meta_box() {
+    if (get_theme_mod('site_meta_content_keywords', true)) {
+        add_meta_box(
+            'post_keywords_meta_box',
+            'Post SEO Keywords',
+            'render_keywords_meta_box',
+            ['post', 'page'],
+            'side',
+            'default'
+        );
+    }
+}
+
+function enqueue_keyword_meta_box_scripts() {
+    if (get_theme_mod('site_meta_content_keywords', true)) {
+        wp_enqueue_script('keyword-meta-box-script', get_template_directory_uri() . '/js/keyword-meta-box.js', array(), '1.0', true);
+        wp_enqueue_style('editor-style', get_template_directory_uri() . '/style-editor.css');
+    }
+}
+
+function save_post_keywords($post_id) {
+    $keywords = sanitize_text_field($_POST['post_keywords']);
+    update_post_meta($post_id, '_post_keywords', $keywords);
+}
+
+add_action('add_meta_boxes', 'add_keywords_meta_box');
+add_action('admin_enqueue_scripts', 'enqueue_keyword_meta_box_scripts');
+add_action('save_post', 'save_post_keywords');

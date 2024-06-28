@@ -297,6 +297,38 @@ function qb_customizer_media($wp_customize)
     );
 }
 
+function qb_customizer_meta($wp_customize)
+{
+    $wp_customize->add_section(
+        'site_meta',
+        array(
+            'title' => __( 'Site Metadata', '_s' ),
+            'priority' => 20,
+            'description' => __( 'Add site metadata for use in schema tags, share 
+                links and SEO features.', '_s' )
+        )
+    );
+    
+    $wp_customize->add_setting(
+        'site_meta_content_keywords',
+        array(
+            'default'   => true,
+            'sanitize_callback' => 'wp_validate_boolean',
+        )
+    );
+
+    $wp_customize->add_control(
+        'site_meta_content_keywords',
+        array(
+            'label'    => __('Enable Content Keywords', 'qb'),
+            'description' => __( 'Allow keywords to be added to posts/pages, to populate 
+                the page keywords meta tag and schema.org keywords tags.', 'qb' ),
+            'section'  => 'site_meta',
+            'type'     => 'checkbox',
+        )
+    );
+}
+
 function qb_customizer_live_preview()
 {
 	wp_enqueue_script( 
@@ -323,6 +355,7 @@ add_action( 'wp_head', 'qb_customizer_css' );
 add_action( 'customize_register', 'qb_customizer_site_info' );
 add_action( 'customize_register', 'qb_customizer_colours' );
 add_action( 'customize_register', 'qb_customizer_media' );
+add_action( 'customize_register', 'qb_customizer_meta' );
 add_action( 'customize_preview_init', 'qb_customizer_live_preview' );
 add_action( 'customize_controls_enqueue_scripts',
     'qb_customizer_dynamic_settings' );
