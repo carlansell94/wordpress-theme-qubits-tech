@@ -13,12 +13,15 @@
         <meta charset="<?php bloginfo( 'charset' ); ?>">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="site_name" property="og:site_name" content="<?= get_bloginfo('name') ?>">
+        <meta name="twitter:card" content="summary" />
         <?php if (is_home()): ?>
             <meta name="title" property="og:title" content="<?= get_bloginfo('name') ?>">
+        <meta name="twitter:title" content="<?= get_bloginfo('name') ?>">
         <meta name="description" property="og:description" content="<?= get_theme_mod( 'site_meta_description', '' ) ?>">
         <?php else: ?>
             <meta name="url" property="og:url" content="<?=get_permalink() ?>">
             <meta name="title" property="og:title" content="<?= the_title() ?>">
+        <meta name="twitter:title" content="<?= the_title() ?>">
             <?php if (has_excerpt()): ?>
                 <meta name="description" property="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>">
             <?php endif; ?>
