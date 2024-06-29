@@ -53,12 +53,16 @@ endif ?>
                 "datePublished": "<?= get_post_time("Y-m-d\TH:i:s+00:00") ?>",
                 "dateModified": "<?= get_the_modified_date("Y-m-d\TH:i:s+00:00") ?>",
                 "author": [{
-                    "@type": "Organization",
-                    "name": "<?= get_bloginfo('name') ?>",
+                "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
+                "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
                     "url": "<?= get_site_url() ?>"
                 }],
                 "commentCount": <?= get_comments_number() ?>,
-                "keywords": "<?php if (isset($keywords)) {echo implode(',', $keywords);} ?>"
+            "copyrightHolder": [{
+                "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
+                "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
+                "url": "<?= get_site_url() ?>"
+            }],
             }
             </script>
         <?php endif; ?>

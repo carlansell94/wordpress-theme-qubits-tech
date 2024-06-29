@@ -310,6 +310,46 @@ function qb_customizer_meta($wp_customize)
     );
     
     $wp_customize->add_setting(
+        'site_meta_author_name',
+        array(
+            'default' => get_bloginfo('name'),
+            'control_settings'  => array(
+                'label'     => __( 'Author Name', '_s' )
+            ),
+            'sanitize_input' => 'sanitize_text_field'
+        )
+    );
+
+    $wp_customize->add_control(
+        'site_meta_author_name',
+        array(
+            'label' => __( 'Author Name', '_s' ),
+            'description' => __( 'Site author name. Can be either an individual, or 
+                organisation. Used to populate the schema.org author property.' , '_s' ),
+            'section' => 'site_meta'
+        )
+    );
+    
+    $wp_customize->add_setting(
+        'site_meta_author_type',
+        array(
+            'default' => 'Organisation'
+        )
+    );
+
+    $wp_customize->add_control( 'site_meta_author_type', array(
+        'type' => 'radio',
+        'section' => 'site_meta',
+        'label' => __( 'Author Type', '_s' ),
+        'description' => __( 'Site author type, used to populate the schema.org author 
+            property.', '_s' ),
+        'choices' => array(
+            'Organization' => __( 'Organization' ),
+            'Person' => __( 'Person' )
+        ),
+    ));
+    
+    $wp_customize->add_setting(
         'site_meta_content_keywords',
         array(
             'default'   => true,
