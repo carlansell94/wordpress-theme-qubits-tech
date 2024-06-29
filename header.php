@@ -15,7 +15,7 @@
         <meta name="site_name" property="og:site_name" content="<?= get_bloginfo('name') ?>">
         <?php if (is_home()): ?>
             <meta name="title" property="og:title" content="<?= get_bloginfo('name') ?>">
-            <meta name="description" property="og:description" content="<?= get_bloginfo('description') ?>">
+        <meta name="description" property="og:description" content="<?= get_theme_mod( 'site_meta_description', '' ) ?>">
         <?php else: ?>
             <meta name="url" property="og:url" content="<?=get_permalink() ?>">
             <meta name="title" property="og:title" content="<?= the_title() ?>">

@@ -350,6 +350,27 @@ function qb_customizer_meta($wp_customize)
     ));
     
     $wp_customize->add_setting(
+        'site_meta_description',
+        array(
+            'default' => '',
+            'control_settings'  => array(
+                'label'     => __( 'Site Description', '_s' )
+            ),
+            'sanitize_input' => 'sanitize_text_field'
+        )
+    );
+
+    $wp_customize->add_control(
+        'site_meta_description',
+        array(
+            'label' => __( 'Site Description', 'qb' ),
+            'description' => __( 'Description of the site. Used to populate the description used 
+                when sharing a non-content page of the site.' , 'qb' ),
+            'section' => 'site_meta'
+        )
+    );
+    
+    $wp_customize->add_setting(
         'site_meta_content_keywords',
         array(
             'default'   => true,
