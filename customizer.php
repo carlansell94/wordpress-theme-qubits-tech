@@ -348,7 +348,7 @@ function qb_customizer_meta($wp_customize)
             'Person' => __( 'Person' )
         ),
     ));
-    
+
     $wp_customize->add_setting(
         'site_meta_description',
         array(
@@ -366,6 +366,27 @@ function qb_customizer_meta($wp_customize)
             'label' => __( 'Site Description', 'qb' ),
             'description' => __( 'Description of the site. Used to populate the description used 
                 when sharing a non-content page of the site.' , 'qb' ),
+            'section' => 'site_meta'
+        )
+    );
+    
+    $wp_customize->add_setting(
+        'site_meta_country_of_origin',
+        array(
+            'default'       => '',
+            'control_settings'  => array(
+                'label'     => __( 'Country of Origin', '_s' )
+            ),
+            'sanitize_input' => 'sanitize_text_field'
+        )
+    );
+
+    $wp_customize->add_control(
+        'site_meta_country_of_origin',
+        array(
+            'label' => __( 'Country of Origin', 'qb' ),
+            'description' => __( 'Site country of origin. Used to populate the schema.org 
+                countryOfOrigin property.' , 'qb' ),
             'section' => 'site_meta'
         )
     );

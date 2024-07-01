@@ -66,9 +66,16 @@ endif ?>
                 "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
                 "url": "<?= get_site_url() ?>"
             }],
-            }
-            </script>
-        <?php endif; ?>
+            <?php
+                $coo = get_theme_mod( 'site_meta_country_of_origin', '' );
+                
+                if ($coo !== '') {
+                    echo '"countryOfOrigin": "' . $coo . '"';
+                }
+            ?>
+        }
+        </script>
+<?php endif; ?>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap" rel="stylesheet">
