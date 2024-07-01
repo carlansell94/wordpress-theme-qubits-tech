@@ -14,13 +14,31 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="site_name" property="og:site_name" content="<?= get_bloginfo('name') ?>">
         <meta name="twitter:card" content="summary" />
-        <?php if (is_home()): ?>
-            <meta name="title" property="og:title" content="<?= get_bloginfo('name') ?>">
+<?php if (is_home()): ?>
+        <meta name="title" property="og:title" content="<?= get_bloginfo('name') ?>">
         <meta name="twitter:title" content="<?= get_bloginfo('name') ?>">
         <meta name="description" property="og:description" content="<?= get_theme_mod( 'site_meta_description', '' ) ?>">
-        <?php else: ?>
-            <meta name="url" property="og:url" content="<?=get_permalink() ?>">
-            <meta name="title" property="og:title" content="<?= the_title() ?>">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "author": [{
+                "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
+                "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
+                "url": "<?= get_site_url() ?>"
+            }],
+            "copyrightHolder": [{
+                "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
+                "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
+                "url": "<?= get_site_url() ?>"
+            }],
+            <?php
+                $coo = get_theme_mod( 'site_meta_country_of_origin', '' );
+                
+                if ($coo !== '') echo '"countryOfOrigin": "' . $coo . '"';
+            ?>}
+        </script>
+<?php else: ?>
         <meta name="twitter:title" content="<?= the_title() ?>">
             <?php if (has_excerpt()): ?>
                 <meta name="description" property="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>">
