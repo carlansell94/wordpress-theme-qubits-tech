@@ -39,18 +39,20 @@
             ?>}
         </script>
 <?php else: ?>
+        <meta name="url" property="og:url" content="<?=get_permalink() ?>">
+        <meta name="title" property="og:title" content="<?= the_title() ?>">
         <meta name="twitter:title" content="<?= the_title() ?>">
-            <?php if (has_excerpt()): ?>
-                <meta name="description" property="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>">
-            <?php endif; ?>
-            <meta name="image" property="og:image" content="<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>">
-            <meta name="type" property="og:type" content="article">
-            <meta property="article:published_time" content="<?= get_post_time("Y-m-d") ?>">
+<?php if (has_excerpt()): ?>
+        <meta name="description" property="og:description" content="<?= str_replace("\n", " ", get_the_excerpt()) ?>">
+<?php endif; ?>
+        <meta name="image" property="og:image" content="<?= wp_get_attachment_url( get_post_thumbnail_id(), 'thumbnail' ) ?>">
+        <meta name="type" property="og:type" content="article">
+        <meta property="article:published_time" content="<?= get_post_time("Y-m-d") ?>">
 <?php $keywords = array();
 if (has_tag()):
-                foreach (get_the_tags() as $tag):
-                    $keywords[] = $tag->name; ?>
-                    <meta property="article:tag" content="<?= $tag->name ?>">
+    foreach (get_the_tags() as $tag):
+        $keywords[] = $tag->name; ?>
+        <meta property="article:tag" content="<?= $tag->name ?>">
     <?php endforeach;
 endif ?>
 <?php if (get_theme_mod( 'site_meta_content_keywords', true )):
@@ -62,23 +64,24 @@ endif ?>
         <meta property="article:tag" content="<?= $keyword ?>">
     <?php endforeach;
 endif ?>
-                <meta name="keywords" content="<?= implode(',', $keywords) ?>">
-            <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "<?php if (get_post_type() == 'page') {echo "Article";} else {echo "BlogPosting";} ?>",
-                "headline": "<?= the_title() ?>",
-                "image": [
-                    "<?= wp_get_attachment_url( get_post_thumbnail_id($post->ID), 'thumbnail' ) ?>"
-                ],
-                "datePublished": "<?= get_post_time("Y-m-d\TH:i:s+00:00") ?>",
-                "dateModified": "<?= get_the_modified_date("Y-m-d\TH:i:s+00:00") ?>",
-                "author": [{
+        <meta name="keywords" content="<?= implode(',', $keywords) ?>">
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "<?php if (get_post_type() == 'page') {echo "Article";} else {echo "BlogPosting";} ?>",
+            "headline": "<?= the_title() ?>",
+            "image": [
+                "<?= wp_get_attachment_url( get_post_thumbnail_id(), 'thumbnail' ) ?>"
+            ],
+            "datePublished": "<?= get_post_time("Y-m-d\TH:i:s+00:00") ?>",
+            "dateModified": "<?= get_the_modified_date("Y-m-d\TH:i:s+00:00") ?>",
+            "author": [{
                 "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
                 "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
-                    "url": "<?= get_site_url() ?>"
-                }],
-                "commentCount": <?= get_comments_number() ?>,
+                "url": "<?= get_site_url() ?>"
+            }],
+            "commentCount": <?= get_comments_number() ?>,
+            "keywords": "<?php if (isset($keywords)) {echo implode(',', $keywords);} ?>",
             "copyrightHolder": [{
                 "@type": "<?= get_theme_mod( 'site_meta_author_type', 'Organization' ) ?>",
                 "name": "<?= get_theme_mod( 'site_meta_author_name', '' ) ?>",
