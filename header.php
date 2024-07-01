@@ -108,76 +108,67 @@ endif ?>
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
         <script>
-            window.addEventListener('load', () => {
-                const mainHeader = document.querySelector('#main-header');
-                const navMenu = mainHeader.querySelector('nav');
-                const button = mainHeader.querySelector('button');
-                const dropdowns = document.querySelectorAll('.sub-menu');
+            document.addEventListener('DOMContentLoaded', () => {
+            const mainHeader = document.querySelector('#main-header');
+            const navMenu = mainHeader.querySelector('nav');
+            const button = mainHeader.querySelector('button');
+            const dropdowns = document.querySelectorAll('.sub-menu');
 
-                dropdowns.forEach((dropdown) => {
-                    const a = dropdown.parentNode.querySelector('a');
-                    const div = document.createElement('div');
+            dropdowns.forEach(dropdown => {
+                const parent = dropdown.parentNode;
+                const link = parent.querySelector('a');
+                const container = document.createElement('div');
+                const iconContainer = document.createElement('div');
+                const icon = document.createElement('p');
 
-                    dropdown.parentNode.removeChild(a);
-                    a.classList.add('menu-item');
-                    div.appendChild(a);
+                link.classList.add('menu-item');
+                container.appendChild(link);
 
-                    const navLinkIconContainer = document.createElement('div');
-                    const navLinkIcon = document.createElement('p');
+                iconContainer.classList.add('menu-item-icon-container');
+                icon.classList.add('menu-item-icon');
+                icon.innerHTML = '&#9660;';
+                iconContainer.appendChild(icon);
+                container.appendChild(iconContainer);
+                parent.insertBefore(container, dropdown);
 
-                    navLinkIconContainer.classList.add('menu-item-icon-container');
-                    navLinkIcon.innerHTML = '&#9660;';
-                    navLinkIcon.classList.add('menu-item-icon');
-
-                    navLinkIconContainer.appendChild(navLinkIcon);
-                    div.appendChild(navLinkIconContainer);
-                    dropdown.parentNode.prepend(div);
-
-                    navLinkIcon.parentNode.addEventListener('click', () => {
-                        if (dropdown.style.display == 'block') {
-                            hideDropDown(dropdown);
-                            navLinkIcon.style.removeProperty('transform');
-                        } else {
-                            showDropDown(dropdown);
-                            navLinkIcon.style.transform = "rotate(180deg)";
-                        }
-                    });
-
-                    dropdown.parentNode.addEventListener('mouseover', () => {
-                        if (window.innerWidth > 992) {
-                            showDropDown(dropdown);
-                        }
-                    });
-
-                    dropdown.parentNode.addEventListener('mouseout', () => {
-                        if (window.innerWidth > 992) {
-                            hideDropDown(dropdown);
-                        }
-                    });
+                iconContainer.addEventListener('click', () => {
+                    const isVisible = dropdown.style.display === 'block';
+                    isVisible ? hideDropDown(dropdown, icon) : showDropDown(dropdown, icon);
                 });
 
-                button.addEventListener('click', () => {
-                    navMenu.style.display == 'flex' ? navMenu.style.display = 'none' : navMenu.style.display = 'flex';
+                parent.addEventListener('mouseover', () => {
+                    if (window.innerWidth > 992) showDropDown(dropdown, icon);
                 });
 
-                window.addEventListener('resize', () => {
-                    if (navMenu.style.display == 'none' && window.innerWidth > 992) {
-                        navMenu.style.display = 'flex';
-                    } else if (navMenu.style.display == 'flex' && window.innerWidth <= 992) {
-                        navMenu.style.display = 'none';
-                    }
+                parent.addEventListener('mouseout', () => {
+                    if (window.innerWidth > 992) hideDropDown(dropdown, icon);
                 });
             });
-            
-            function showDropDown(dropdown) {
+
+            button.addEventListener('click', () => {
+                navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 992) {
+                    navMenu.style.display = 'flex';
+                } else if (window.innerWidth <= 992) {
+                    navMenu.style.display = 'none';
+                }
+            });
+
+            function showDropDown(dropdown, icon) {
                 dropdown.parentNode.classList.add('active-menu');
                 dropdown.style.display = 'block';
+                icon.style.transform = 'rotate(180deg)';
             }
 
-            function hideDropDown(dropdown) {
+            function hideDropDown(dropdown, icon) {
                 dropdown.parentNode.classList.remove('active-menu');
                 dropdown.style.display = 'none';
+                icon.style.removeProperty('transform');
             }
+        });
         </script>
         <?php wp_head(); ?>
     </head>
