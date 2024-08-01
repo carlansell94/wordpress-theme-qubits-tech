@@ -140,6 +140,56 @@ add_filter( 'comment_form_default_fields', 'qb_remove_web_field_filter' );
 add_filter( 'wp_content_img_tag', 'qb_add_image_links_filter', 10, 3 );
 add_filter( 'wp_calculate_image_sizes', 'qb_image_sizes_filter' );
 
+/* 2.1. ALLOW SVG UPLOADS */
+function qb_enable_svg_uploads_filter($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+
+function qb_disable_default_svg_filter($data, $file, $filename, $mimes) {
+    $filetype = wp_check_filetype($filename, $mimes);
+    if ($filetype['ext'] === 'svg') {
+        $data['ext'] = 'svg';
+        $data['type'] = 'image/svg+xml';
+    }
+    return $data;
+}
+
+function check_for_svg($file) {
+    if (!isset($_REQUEST['action']) || $_REQUEST['action'] !== 'upload-attachment') {
+        return $file;
+    }
+
+    $filetype = wp_check_filetype_and_ext($file['tmp_name'], $file['name']);
+    $ext = $filetype['ext'];
+    $type = $filetype['type'];
+    $proper_filename = $file['name'];
+
+    if ($type && 0 === strpos($type, 'image/') && $ext !== 'svg') {
+        return $file;
+    }
+
+    $svg_contents = file_get_contents($file['tmp_name']);
+
+    // Basic check for XML structure to prevent XSS attacks
+    try {
+        $xml = new SimpleXMLElement($svg_contents);
+        if ($xml === false) {
+            $file['error'] = 'Invalid SVG file.';
+        }
+    } catch (Exception $e) {
+        $file['error'] = 'Invalid SVG file: ' . $e->getMessage();
+    }
+
+    return $file;
+}
+
+if (get_option( 'media_allow_svg_uploads', true )) {
+    add_filter( 'wp_handle_upload_prefilter', 'check_for_svg' );
+    add_filter( 'upload_mimes', 'qb_enable_svg_uploads_filter' );
+    add_filter( 'wp_check_filetype_and_ext', 'qb_disable_default_svg_filter', 10, 4 );
+}
+
 
 /* 3. THEME ADDITIONAL FUNCTIONS */
 function qb_post_thumbnail(int|WP_Post $post_id): string
@@ -428,3 +478,42 @@ function save_post_keywords($post_id) {
 add_action('add_meta_boxes', 'add_keywords_meta_box');
 add_action('admin_enqueue_scripts', 'enqueue_keyword_meta_box_scripts');
 add_action('save_post', 'save_post_keywords');
+
+
+/* 4. WP SETTINGS OPTIONS */
+
+/* 4.1. WP MEDIA SETTINGS */
+function init_theme_media_settings() {
+    add_settings_section(
+        'theme_media_settings_section',
+        'Theme Media Settings',
+        'render_theme_media_settings_section',
+        'media'
+    );
+
+    add_settings_field(
+        'media_allow_svg_uploads',
+        'Allow SVG Uploads',
+        'render_media_allow_svg_uploads',
+        'media',
+        'theme_media_settings_section'
+    );
+
+    register_setting('media', 'media_allow_svg_uploads');
+}
+
+function render_theme_media_settings_section() {
+    echo "<p>Theme-specific media settings.</p>";
+}
+
+function render_media_allow_svg_uploads() {
+    $value = get_option('media_allow_svg_uploads', 1); ?>
+
+    <input type="checkbox" name="media_allow_svg_uploads" value="1" <?= checked(1, $value, false) ?>/>
+    <label for="media_allow_svg_uploads">Allow SVG files to be uploaded to the media library.</label>
+    <p class="description">Note that this provides little protection against malicious SVGs - 
+        only upload SVG files you trust, or use an extension.</p>
+    <?php
+}
+
+add_action('admin_init', 'init_theme_media_settings');

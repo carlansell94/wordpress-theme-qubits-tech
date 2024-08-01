@@ -278,6 +278,26 @@ function qb_customizer_media($wp_customize)
     );
 
     $wp_customize->add_setting(
+        'media_allow_svg_uploads',
+        array(
+            'default'   => 1,
+            'type'      => 'option',
+            'sanitize_callback' => 'absint'
+        )
+    );
+
+    $wp_customize->add_control(
+        'media_allow_svg_uploads',
+        array(
+            'label' => __( 'Allow SVG uploads to the media gallery.', 'qb' ),
+            'description' => 'Note that this provides little protection against malicious SVGs - 
+                only upload SVG files you trust, or use an extension.',
+            'type' => 'checkbox',
+            'section' => 'header_image'
+        )
+    );
+
+    $wp_customize->add_setting(
         'media_ignore_pixel_density',
         array(
             'default'   => 0
