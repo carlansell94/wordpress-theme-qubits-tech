@@ -280,9 +280,9 @@ function qb_customizer_media($wp_customize)
     $wp_customize->add_setting(
         'media_allow_svg_uploads',
         array(
-            'default'   => 1,
+            'default'   => true,
             'type'      => 'option',
-            'sanitize_callback' => 'absint'
+            'sanitize_callback' => 'wp_validate_boolean'
         )
     );
 
@@ -300,7 +300,9 @@ function qb_customizer_media($wp_customize)
     $wp_customize->add_setting(
         'media_ignore_pixel_density',
         array(
-            'default'   => 0
+            'default'   => false,
+            'type'      => 'option',
+            'sanitize_callback' => 'wp_validate_boolean'
         )
     );
 

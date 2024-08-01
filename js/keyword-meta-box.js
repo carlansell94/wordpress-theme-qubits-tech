@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         listItem.textContent = `${keyword} `;
 
         const removeButton = document.createElement('span');
-        removeButton.classList.add('keyword-remove');
+        removeButton.classList.add('element-remove');
         removeButton.textContent = 'x';
 
         function updateKeywords() {

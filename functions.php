@@ -432,9 +432,67 @@ function qb_list_child_pages() {
     return get_pages( 'sort_column=menu_order&title_li=&parent=' . $id . '&echo=0' );
 }
 
-/* 4. Additional Editor Features */
 
-/* 4.1 Post Keywords */
+/* 4. WP SETTINGS OPTIONS */
+
+/* 4.1. WP MEDIA SETTINGS */
+function init_theme_media_settings() {
+    add_settings_section(
+        'theme_media_settings_section',
+        'Theme Media Settings',
+        'render_theme_media_settings_section',
+        'media'
+    );
+
+    add_settings_field(
+        'media_allow_svg_uploads',
+        'Allow SVG Uploads',
+        'render_media_allow_svg_uploads',
+        'media',
+        'theme_media_settings_section'
+    );
+
+    add_settings_field(
+        'media_ignore_pixel_density',
+        'Ignore Pixel Density',
+        'render_media_ignore_pixel_density',
+        'media',
+        'theme_media_settings_section'
+    );
+
+    register_setting('media', 'media_allow_svg_uploads');
+    register_setting('media', 'media_ignore_pixel_density');
+}
+
+function render_theme_media_settings_section() {
+    echo "<p>Theme-specific media settings.</p>";
+}
+
+function render_media_allow_svg_uploads() {
+    $value = get_option('media_allow_svg_uploads', true); ?>
+
+    <input type="checkbox" name="media_allow_svg_uploads" value="1" <?= checked(1, $value, false) ?>/>
+    <label for="media_allow_svg_uploads">Allow SVG files to be uploaded to the media library.</label>
+    <p class="description">Note that this provides little protection against malicious SVGs - 
+        only upload SVG files you trust, or use an extension.</p>
+    <?php
+}
+
+function render_media_ignore_pixel_density() {
+    $value = get_option('media_ignore_pixel_density', false); ?>
+
+    <input type="checkbox" name="media_ignore_pixel_density" value="1" <?= checked(1, $value, false) ?>/>
+    <label for="media_ignore_pixel_density">When enabled, media queries calculate screen width using a 1x 
+        pixel density. Results in smaller but lower quality images on high density displays.</label>
+    <?php
+}
+
+add_action('admin_init', 'init_theme_media_settings');
+
+
+/* 5. BUNDLED BLOCKS */
+
+/* 5.1. POST KEYWORDS */
 function render_keywords_meta_box($post) {
     $keywords = get_post_meta($post->ID, '_post_keywords', true); ?>
 
@@ -465,8 +523,18 @@ function add_keywords_meta_box() {
 
 function enqueue_keyword_meta_box_scripts() {
     if (get_theme_mod('site_meta_content_keywords', true)) {
-        wp_enqueue_script('keyword-meta-box-script', get_template_directory_uri() . '/js/keyword-meta-box.js', array(), '1.0', true);
-        wp_enqueue_style('editor-style', get_template_directory_uri() . '/style-editor.css');
+        wp_enqueue_script(
+            'keyword-meta-box-script',
+            get_template_directory_uri() . '/js/keyword-meta-box.js',
+            array(),
+            '1.0',
+            true
+        );
+
+        wp_enqueue_style(
+            'editor-style',
+            get_template_directory_uri() . '/style-editor.css'
+        );
     }
 }
 
@@ -478,42 +546,3 @@ function save_post_keywords($post_id) {
 add_action('add_meta_boxes', 'add_keywords_meta_box');
 add_action('admin_enqueue_scripts', 'enqueue_keyword_meta_box_scripts');
 add_action('save_post', 'save_post_keywords');
-
-
-/* 4. WP SETTINGS OPTIONS */
-
-/* 4.1. WP MEDIA SETTINGS */
-function init_theme_media_settings() {
-    add_settings_section(
-        'theme_media_settings_section',
-        'Theme Media Settings',
-        'render_theme_media_settings_section',
-        'media'
-    );
-
-    add_settings_field(
-        'media_allow_svg_uploads',
-        'Allow SVG Uploads',
-        'render_media_allow_svg_uploads',
-        'media',
-        'theme_media_settings_section'
-    );
-
-    register_setting('media', 'media_allow_svg_uploads');
-}
-
-function render_theme_media_settings_section() {
-    echo "<p>Theme-specific media settings.</p>";
-}
-
-function render_media_allow_svg_uploads() {
-    $value = get_option('media_allow_svg_uploads', 1); ?>
-
-    <input type="checkbox" name="media_allow_svg_uploads" value="1" <?= checked(1, $value, false) ?>/>
-    <label for="media_allow_svg_uploads">Allow SVG files to be uploaded to the media library.</label>
-    <p class="description">Note that this provides little protection against malicious SVGs - 
-        only upload SVG files you trust, or use an extension.</p>
-    <?php
-}
-
-add_action('admin_init', 'init_theme_media_settings');
