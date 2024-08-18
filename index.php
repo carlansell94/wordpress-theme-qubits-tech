@@ -48,12 +48,12 @@ get_header(); ?>
                 </article>
             <?php endwhile; ?>
         </section>
-        <nav id="pagination">
+        <div id="pagination">
             <?php the_posts_pagination( array(
                 'prev_text' => __( '&lt;', 'textdomain' ),
                 'next_text' => __( '&gt;', 'textdomain' ),
             ) ); ?>
-        </nav>
+        </div>
     </main>
     <?php get_sidebar(); ?>
 </div>

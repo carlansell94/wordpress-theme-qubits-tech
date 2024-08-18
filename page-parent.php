@@ -10,7 +10,16 @@
  * 
  * @package QubitsTech
  */
+
+$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+$posts_per_page = get_option('posts_per_page');
+$total_pages = ceil(count($args['qb_pages']) / $posts_per_page);
+ 
+$offset = ($paged - 1) * $posts_per_page;
+$qb_pages_paginated = array_slice($args['qb_pages'], $offset, $posts_per_page);
+ 
 ?>
+
 <section>
     <h2 class="hidden-header">Content:</h2>
     <?= the_content(); ?>
@@ -66,3 +75,17 @@
     </section>
     <?php endif; ?>
 <?php endif; ?>
+<section id="pagination">
+    <nav class="pagination navigation">
+    <?php
+        if ($total_pages > 1) {
+            echo paginate_links(array(
+                'current' => max(1, $paged),
+                'total' => $total_pages,
+                'prev_text' => __( '&lt;', 'textdomain' ),
+                'next_text' => __( '&gt;', 'textdomain' ),
+            ));
+        }
+    ?>
+    </nav>
+</section>

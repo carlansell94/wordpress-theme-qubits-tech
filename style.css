@@ -397,10 +397,12 @@ table > tbody td > a {
 
 /* ------ 5.3: PAGINATION ------ */
 .pagination {
+    gap: 0.25rem;
     margin: 2rem auto;
 }
 
-.pagination .page-numbers {
+.pagination .page-numbers,
+.pagination-arrows {
     background: var(--qb-colour-content-bg-offset);
     border: var(--qb-border);
     border-radius: .25rem;
@@ -408,7 +410,8 @@ table > tbody td > a {
     padding: .5rem 1rem;
 }
 
-.pagination a.page-numbers:hover {
+.pagination a.page-numbers:hover,
+.pagination-arrows:hover {
     filter: brightness(0.9);
     transition: var(--qb-transition);
 }
@@ -416,6 +419,11 @@ table > tbody td > a {
 .pagination .page-numbers.current {
     background: var(--qb-colour-accent);
     color: var(--qb-colour-font-alt);
+}
+
+section#pagination {
+    align-items: center;
+    display: flex;
 }
 
 
